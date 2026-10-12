@@ -2,10 +2,11 @@ import Link from "next/link";
 import { ContactCta } from "@/components/contact-cta";
 import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
+import { Photo } from "@/components/photo";
 import { SectionHeading } from "@/components/section-heading";
 import { ServiceRow } from "@/components/service-row";
 import { createMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
-import { capabilities, services } from "@/lib/services";
+import { capabilities, images, services } from "@/lib/services";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = createMetadata({
@@ -82,6 +83,12 @@ export default function HomePage() {
           </aside>
         </Container>
         <div className="ruler" aria-hidden="true" />
+      </section>
+
+      <section className="pt-16">
+        <Container>
+          <Photo image={images.corridor} />
+        </Container>
       </section>
 
       <section className="py-20">
