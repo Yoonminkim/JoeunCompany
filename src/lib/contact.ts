@@ -3,8 +3,10 @@
  */
 
 export const inquiryTypes = [
-  { value: "cleanroom", label: "크린룸 관련 제품" },
-  { value: "semiconductor", label: "반도체 후처리" },
+  { value: "semiconductor", label: "반도체 장비 후처리" },
+  { value: "fabrication", label: "알루미늄·SUS403 제품 주문제작" },
+  { value: "welding-sanding", label: "용접·샌딩" },
+  { value: "cleanroom", label: "크린룸 제품" },
   { value: "other", label: "기타 문의" },
 ] as const;
 

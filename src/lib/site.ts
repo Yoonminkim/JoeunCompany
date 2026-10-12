@@ -28,24 +28,28 @@ export const siteConfig = {
   language: "ko",
 
   /** 기본 title (홈) */
-  title: "조은상사 | 크린룸 제품 · 반도체 후처리",
+  title: "조은상사 | 반도체 장비 후처리 · 주문제작 · 크린룸 제품",
   /** 각 페이지 title 에 붙는 접미사 */
   titleTemplate: "%s | 조은상사",
   description:
-    "조은상사(JoeunCompany, JJ)는 크린룸 관련 제품 공급과 반도체 후처리 서비스를 제공합니다. 반도체 산업 현장에 필요한 크린룸 제품과 후처리 솔루션을 상담해 보세요.",
+    "조은상사(JoeunCompany, JJ)는 반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접·샌딩, 크린룸 제품(헤어캡·마스크·면봉·장갑 등)을 취급합니다.",
 
   keywords: [
     "조은상사",
     "JoeunCompany",
     "Joeun Company",
     "JJ",
+    "반도체",
+    "반도체 장비 후처리",
+    "반도체 후처리",
+    "알루미늄 주문제작",
+    "SUS403",
+    "용접",
+    "샌딩",
     "크린룸",
     "클린룸",
     "크린룸 제품",
     "크린룸 관련 제품",
-    "반도체",
-    "반도체 후처리",
-    "반도체 후처리 서비스",
   ],
 
   /** 콘텐츠를 실제로 수정한 날짜. sitemap 의 lastModified 에 사용 (빌드 시각이 아니라 실제 변경일을 쓰는 게 SEO 상 정확) */
@@ -70,26 +74,6 @@ export const siteConfig = {
 
 export const navigation = [
   { href: "/about", label: "회사소개" },
-  { href: "/products", label: "크린룸 제품" },
-  { href: "/semiconductor", label: "반도체 후처리" },
+  { href: "/services", label: "제품·서비스" },
   { href: "/contact", label: "문의하기" },
-] as const;
-
-/**
- * 크린룸 제품 카테고리 (초안).
- * TODO: 실제 취급 품목으로 교체하세요.
- */
-export const productCategories = [
-  {
-    name: "크린룸 소모품",
-    description: "크린룸 작업 환경에서 사용하는 소모성 용품",
-  },
-  {
-    name: "크린룸 보호구·의류",
-    description: "작업자와 공정을 보호하기 위한 착용 용품",
-  },
-  {
-    name: "크린룸 청소·세정 용품",
-    description: "청정 환경 유지를 위한 청소 및 세정 용품",
-  },
 ] as const;

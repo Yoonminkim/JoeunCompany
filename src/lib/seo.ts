@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { servicePath, services, type Service } from "./services";
 import { siteConfig } from "./site";
 
 export const ogImage = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: `${siteConfig.name} - 크린룸 제품 · 반도체 후처리`,
+  alt: `${siteConfig.name} - 반도체 장비 후처리 · 주문제작 · 크린룸 제품`,
 };
 
 type PageSeo = {
@@ -14,6 +15,8 @@ type PageSeo = {
   /** 사이트 루트 기준 경로. canonical / og:url 에 사용됩니다. (예: "/about") */
   path: string;
   keywords?: string[];
+  /** 공유 이미지 경로(public 기준, 1200×630 권장). 생략하면 사이트 기본 이미지 */
+  image?: string;
   /** true 이면 title 템플릿("%s | 조은상사")을 적용하지 않습니다. (홈 전용) */
   absoluteTitle?: boolean;
 };
@@ -29,9 +32,11 @@ export function createMetadata({
   description,
   path,
   keywords,
+  image,
   absoluteTitle = false,
 }: PageSeo): Metadata {
   const fullTitle = absoluteTitle ? title : `${title} | ${siteConfig.name}`;
+  const shareImage = image ? { ...ogImage, url: image } : ogImage;
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -45,13 +50,13 @@ export function createMetadata({
       title: fullTitle,
       description,
       url: path,
-      images: [ogImage],
+      images: [shareImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [ogImage.url],
+      images: [shareImage.url],
     },
   };
 }
@@ -71,7 +76,7 @@ export function organizationJsonLd() {
     url: siteConfig.url,
     logo: `${siteConfig.url}/logo.png`,
     description: siteConfig.description,
-    knowsAbout: ["크린룸 관련 제품", "반도체 후처리", "반도체"],
+    knowsAbout: services.map((service) => service.name),
     ...(contact.phone ? { telephone: contact.phone } : {}),
     ...(contact.email ? { email: contact.email } : {}),
     ...(contact.address
@@ -83,7 +88,7 @@ export function organizationJsonLd() {
           },
         }
       : {}),
-    ...(sameAs.length > 0 && { sameAs: [...sameAs] }),
+    ...(sameAs.length > 0 ? { sameAs: [...sameAs] } : {}),
   };
 }
 
@@ -114,5 +119,37 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       name: item.name,
       item: absoluteUrl(item.path),
     })),
+  };
+}
+
+/** 제품·서비스 상세 페이지용 Service 구조화 데이터 (취급 품목이 있으면 OfferCatalog 로 함께 표기) */
+export function serviceJsonLd(service: Service) {
+  const url = absoluteUrl(servicePath(service.slug));
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name: service.name,
+    serviceType: service.name,
+    description: service.seo.description ?? service.summary,
+    url,
+    provider: { "@id": `${siteConfig.url}/#organization` },
+    ...(service.products && service.products.length > 0
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: `${service.name} 취급 품목`,
+            itemListElement: service.products.map((product) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: product.name,
+                description: product.description,
+              },
+            })),
+          },
+        }
+      : {}),
   };
 }
