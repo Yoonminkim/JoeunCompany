@@ -22,7 +22,11 @@ npm run start   # 빌드 결과 실행
 | `src/app/{about,contact}` | 회사소개, 문의하기 |
 | `src/app/contact/actions.ts`, `src/components/contact-form.tsx` | 문의 폼 (서버 액션 + 서버 측 검증 + 스팸 방지 허니팟) |
 | `src/lib/contact.ts`, `src/lib/mail.ts` | 문의 항목/검증 규칙, 메일 발송 (Resend) |
-| `public/og-image.png`, `public/logo.png`, `src/app/favicon.ico` | 임시 브랜드 이미지 (실제 로고로 교체 필요) |
+| `public/brand/logo-original.png` | 조은상사 공식 로고 원본 (투명 배경, 브랜드 색 `#492EA7`) |
+| `public/brand/logo.png`, `logo-mark.png` | 원본에서 여백을 제거한 가로형 로고 / JJ 모노그램. 헤더·푸터에서 사용 |
+| `public/logo.png`, `public/og-image.png`, `src/app/{favicon.ico,apple-icon.png}` | 로고에서 파생한 구조화 데이터용 로고, 공유(OG) 이미지, 아이콘 |
+
+디자인 토큰(색상·폰트)은 `src/app/globals.css` 에서 관리합니다. 포인트 색은 로고의 보라색 한 가지만 사용합니다.
 
 ### 제품·서비스 항목 추가/수정
 
@@ -45,7 +49,7 @@ seo: {
    빌드 시점에 반영되므로 배포 환경에도 빌드 전에 등록해야 합니다.
 2. **연락처 입력** – `src/lib/site.ts` 의 `contact` (전화/이메일/주소). 입력하면 푸터·문의 페이지·JSON-LD 에 자동 반영됩니다.
 3. **콘텐츠 확정** – `src/lib/services.ts` 의 설명 문구는 초안입니다. 실제 작업 범위·규격·가능 소재에 맞게 확인/수정하세요.
-4. **이미지 교체** – 로고, OG 이미지(1200×630), 파비콘.
+4. **이미지 확인** – 로고 원본이 바뀌면 `public/brand/` 의 파일과 OG 이미지, 파비콘을 다시 생성해야 합니다. 벡터(SVG) 원본이 있으면 더 선명하게 쓸 수 있습니다.
 5. **문의 폼 메일 설정** – 아래 환경변수를 등록해야 프로덕션에서 문의가 접수됩니다. 미설정 시 폼은 "접수 불가" 안내를 보여 줍니다.
    - `RESEND_API_KEY`: [Resend](https://resend.com) API 키
    - `CONTACT_TO_EMAIL`: 문의를 받을 이메일 (쉼표로 여러 명 가능)

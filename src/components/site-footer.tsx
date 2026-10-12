@@ -1,30 +1,39 @@
 import Link from "next/link";
 import { navigation, siteConfig } from "@/lib/site";
+import { Container } from "./container";
+import { Logo } from "./logo";
 
 export function SiteFooter() {
-  const { contact } = siteConfig;
+  const { phone, fax, email, address } = siteConfig.contact;
+  const hasContact = Boolean(phone || fax || email || address);
+
+  const rows = [
+    { label: "TEL", value: phone, href: phone ? `tel:${phone}` : undefined },
+    { label: "FAX", value: fax },
+    {
+      label: "EMAIL",
+      value: email,
+      href: email ? `mailto:${email}` : undefined,
+    },
+    { label: "ADDRESS", value: address },
+  ].filter((row) => row.value);
 
   return (
-    <footer className="border-t border-slate-200 bg-slate-50">
-      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:grid-cols-2 lg:grid-cols-3">
-        <div>
-          <p className="text-base font-bold text-slate-900">
-            {siteConfig.name}{" "}
-            <span className="text-sm font-medium text-slate-500">
-              {siteConfig.nameEn}
-            </span>
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
+    <footer className="border-t border-line bg-paper-deep">
+      <Container className="grid gap-12 py-14 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <Logo className="h-9 w-auto" />
+          <p className="mt-6 max-w-sm text-sm leading-7 text-ink-soft">
             반도체 장비 후처리, 금속 주문제작, 크린룸 제품을 취급합니다.
           </p>
         </div>
 
-        <nav aria-label="푸터 메뉴">
-          <p className="text-sm font-semibold text-slate-900">바로가기</p>
-          <ul className="mt-2 space-y-1.5 text-sm text-slate-600">
+        <nav aria-label="푸터 메뉴" className="md:col-span-3">
+          <p className="label">Menu</p>
+          <ul className="mt-4 space-y-2.5 text-sm font-medium">
             {navigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-brand-600">
+                <Link href={item.href} className="hover:text-accent">
                   {item.label}
                 </Link>
               </li>
@@ -32,40 +41,39 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        {(contact.phone || contact.fax || contact.email || contact.address) && (
-          <address className="text-sm not-italic leading-6 text-slate-600">
-            <p className="text-sm font-semibold text-slate-900">연락처</p>
-            <ul className="mt-2 space-y-1.5">
-              {contact.phone && (
-                <li>
-                  전화{" "}
-                  <a href={`tel:${contact.phone}`} className="hover:text-brand-600">
-                    {contact.phone}
-                  </a>
-                </li>
-              )}
-              {contact.email && (
-                <li>
-                  이메일{" "}
-                  <a
-                    href={`mailto:${contact.email}`}
-                    className="hover:text-brand-600"
-                  >
-                    {contact.email}
-                  </a>
-                </li>
-              )}
-              {contact.fax && <li>팩스 {contact.fax}</li>}
-              {contact.address && <li>{contact.address}</li>}
-            </ul>
+        {hasContact && (
+          <address className="not-italic md:col-span-4">
+            <p className="label">Contact</p>
+            <dl className="mt-4 space-y-3 text-sm">
+              {rows.map((row) => (
+                <div
+                  key={row.label}
+                  className="grid grid-cols-[4.5rem_1fr] gap-3"
+                >
+                  <dt className="label pt-0.5 !text-[10px]">{row.label}</dt>
+                  <dd className="leading-6">
+                    {row.href ? (
+                      <a href={row.href} className="hover:text-accent">
+                        {row.value}
+                      </a>
+                    ) : (
+                      row.value
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </address>
         )}
-      </div>
+      </Container>
 
-      <div className="border-t border-slate-200">
-        <p className="mx-auto max-w-6xl px-5 py-4 text-xs text-slate-500">
-          © {siteConfig.name}. All rights reserved.
-        </p>
+      <div className="border-t border-line">
+        <Container className="flex flex-wrap items-center justify-between gap-2 py-4">
+          <p className="text-xs text-ink-soft">
+            © {siteConfig.name}. All rights reserved.
+          </p>
+          <p className="label !text-[10px]">Joeun Company · JJ</p>
+        </Container>
       </div>
     </footer>
   );
