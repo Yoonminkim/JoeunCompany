@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Container } from "./container";
 import { JsonLd } from "./json-ld";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
@@ -9,11 +10,11 @@ type PageHeaderProps = {
   path: string;
   /** 상위 페이지. 있으면 빵부스러기가 홈 / 상위 / 현재 순서가 됩니다. */
   parent?: { name: string; path: string };
-  /** h1 위에 표시하는 작은 분류 라벨 */
+  /** h1 위에 표시하는 분류 라벨 */
   eyebrow?: string;
 };
 
-/** 서브페이지 상단: 빵부스러기 + h1 + 설명 (+ BreadcrumbList JSON-LD) */
+/** 서브페이지 상단: 빵부스러기 + h1 + 설명 + 눈금자 (+ BreadcrumbList JSON-LD) */
 export function PageHeader({
   title,
   description,
@@ -24,13 +25,13 @@ export function PageHeader({
   const trail = [...(parent ? [parent] : []), { name: title, path }];
 
   return (
-    <section className="bg-linear-to-br from-brand-900 to-brand-700 text-white">
+    <section className="border-b border-line">
       <JsonLd data={breadcrumbJsonLd(trail)} />
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
-        <nav aria-label="현재 위치" className="text-sm text-blue-200">
-          <ol className="flex flex-wrap items-center gap-2">
+      <Container className="pb-12 pt-8 sm:pb-16">
+        <nav aria-label="현재 위치" className="text-sm text-ink-soft">
+          <ol className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <li>
-              <Link href="/" className="hover:text-white">
+              <Link href="/" className="hover:text-accent">
                 {siteConfig.name}
               </Link>
             </li>
@@ -38,32 +39,35 @@ export function PageHeader({
               <>
                 <li aria-hidden="true">/</li>
                 <li>
-                  <Link href={parent.path} className="hover:text-white">
+                  <Link href={parent.path} className="hover:text-accent">
                     {parent.name}
                   </Link>
                 </li>
               </>
             )}
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-white">
+            <li aria-current="page" className="font-medium text-ink">
               {title}
             </li>
           </ol>
         </nav>
+
         {eyebrow && (
-          <p className="mt-6 text-sm font-semibold tracking-wide text-blue-200">
+          <p className="mt-12 flex items-center gap-3 text-sm font-semibold text-accent">
+            <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
             {eyebrow}
           </p>
         )}
         <h1
-          className={`${eyebrow ? "mt-2" : "mt-4"} text-3xl font-bold tracking-tight sm:text-4xl`}
+          className={`${eyebrow ? "mt-4" : "mt-12"} max-w-4xl text-4xl font-bold leading-[1.2] tracking-tight sm:text-5xl`}
         >
           {title}
         </h1>
-        <p className="mt-4 max-w-2xl text-base leading-7 text-blue-100 sm:text-lg">
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-soft">
           {description}
         </p>
-      </div>
+      </Container>
+      <div className="ruler" aria-hidden="true" />
     </section>
   );
 }

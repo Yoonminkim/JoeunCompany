@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ContactCta } from "@/components/contact-cta";
+import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
-import { ServiceCard } from "@/components/service-card";
+import { SectionHeading } from "@/components/section-heading";
+import { ServiceRow } from "@/components/service-row";
 import { createMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
-import { services } from "@/lib/services";
+import { capabilities, services } from "@/lib/services";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = createMetadata({
@@ -19,57 +21,87 @@ export default function HomePage() {
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
 
-      <section className="bg-linear-to-br from-brand-900 to-brand-700 text-white">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
-          <p className="text-sm font-semibold tracking-widest text-blue-200">
-            {siteConfig.nameEn} · JJ
-          </p>
-          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-            반도체 장비 후처리부터
-            <br />
-            주문제작, 크린룸 제품까지
-            <br />
-            {siteConfig.name}
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-blue-100 sm:text-lg">
-            {siteConfig.name}은 반도체 장비 후처리, 알루미늄·SUS403 제품
-            주문제작, 용접·샌딩, 그리고 헤어캡·마스크·면봉·장갑 등 크린룸
-            제품을 취급합니다.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand-900 transition-colors hover:bg-blue-50"
-            >
-              제품·서비스 보기
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
-            >
-              문의하기
-            </Link>
+      <section className="border-b border-line">
+        <Container className="grid gap-14 pb-16 pt-14 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-20">
+          <div className="lg:col-span-7">
+            <p className="label">Joeun Company · JJ</p>
+            <h1 className="mt-6 text-[2.5rem] font-bold leading-[1.15] tracking-tight sm:text-6xl">
+              <span className="mb-4 block text-xl font-semibold tracking-normal text-accent sm:text-2xl">
+                {siteConfig.name}
+              </span>
+              반도체 장비 후처리,
+              <br />
+              금속 주문제작,
+              <br />
+              크린룸 제품.
+            </h1>
+            <p className="mt-8 max-w-xl text-lg leading-8 text-ink-soft">
+              알루미늄·SUS403 제품 주문제작과 용접·샌딩, 반도체 장비 후처리,
+              그리고 헤어캡·마스크·면봉·장갑 등 크린룸 제품을 취급합니다.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-3 bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
+              >
+                제품·서비스 보기
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center border border-ink px-6 py-3.5 text-sm font-semibold transition-colors hover:bg-ink hover:text-paper"
+              >
+                문의하기
+              </Link>
+            </div>
           </div>
-        </div>
+
+          <aside
+            aria-label="취급 범위 요약"
+            className="self-end lg:col-span-5"
+          >
+            <p className="label mb-3">Spec sheet · 취급 범위</p>
+            <dl className="border-t-2 border-ink">
+              {capabilities.map((item) => (
+                <div
+                  key={item.label}
+                  className="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-line py-5"
+                >
+                  <dt>
+                    <span className="label block">{item.label}</span>
+                    <span className="mt-1 block text-sm font-semibold">
+                      {item.title}
+                    </span>
+                  </dt>
+                  <dd className="text-lg font-medium leading-7">
+                    {item.values.join(" · ")}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </Container>
+        <div className="ruler" aria-hidden="true" />
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl font-bold text-slate-900">제품·서비스</h2>
-          <Link
-            href="/services"
-            className="text-sm font-semibold text-brand-600 hover:underline"
-          >
-            전체 보기 →
-          </Link>
-        </div>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <li key={service.slug}>
-              <ServiceCard service={service} />
-            </li>
-          ))}
-        </ul>
+      <section className="py-20">
+        <Container>
+          <SectionHeading eyebrow="Services" title="제품·서비스">
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-accent hover:underline"
+            >
+              전체 보기 →
+            </Link>
+          </SectionHeading>
+          <ul className="mt-8 border-t border-line">
+            {services.map((service) => (
+              <li key={service.slug}>
+                <ServiceRow service={service} />
+              </li>
+            ))}
+          </ul>
+        </Container>
       </section>
 
       <ContactCta />

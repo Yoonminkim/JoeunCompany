@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContactCta } from "@/components/contact-cta";
+import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
 import { createMetadata, serviceJsonLd } from "@/lib/seo";
 import {
   getRelatedServices,
@@ -13,6 +15,7 @@ import {
   servicePath,
   services,
 } from "@/lib/services";
+import { siteConfig } from "@/lib/site";
 
 // 빌드 시 모든 상세 페이지를 미리 생성합니다. (목록에 없는 slug 는 아래에서 404 처리)
 export function generateStaticParams() {
@@ -45,6 +48,13 @@ export default async function ServiceDetailPage({
   const path = servicePath(service.slug);
   const related = getRelatedServices(service);
   const isCleanroom = service.category === "cleanroom";
+  const categoryLabel = serviceCategories[service.category].label;
+  const { phone } = siteConfig.contact;
+
+  // 섹션 번호(01, 02 ...)를 렌더 순서대로 매깁니다.
+  let sectionNumber = 0;
+  const nextEyebrow = (name: string) =>
+    `${String(++sectionNumber).padStart(2, "0")} / ${name}`;
 
   return (
     <>
@@ -54,20 +64,17 @@ export default async function ServiceDetailPage({
         description={service.subtitle}
         path={path}
         parent={{ name: "제품·서비스", path: "/services" }}
-        eyebrow={
-          serviceCategories[service.category].label !== service.name
-            ? serviceCategories[service.category].label
-            : undefined
-        }
+        eyebrow={categoryLabel !== service.name ? categoryLabel : undefined}
       />
 
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-3">
-        <div className="space-y-14 lg:col-span-2">
+      <Container className="grid gap-14 py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
+        <div className="space-y-16 lg:col-span-8">
           <section>
-            <h2 className="text-2xl font-bold text-slate-900">
-              {service.name} 안내
-            </h2>
-            <div className="mt-4 space-y-4 leading-8 text-slate-700">
+            <SectionHeading
+              eyebrow={nextEyebrow("Overview")}
+              title={`${service.name} 안내`}
+            />
+            <div className="mt-6 space-y-5 text-[17px] leading-9">
               {service.intro.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -76,37 +83,45 @@ export default async function ServiceDetailPage({
 
           {service.products && service.products.length > 0 && (
             <section>
-              <h2 className="text-2xl font-bold text-slate-900">취급 품목</h2>
-              <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+              <SectionHeading eyebrow={nextEyebrow("Items")} title="취급 품목" />
+              <dl className="mt-4 border-t border-line">
                 {service.products.map((product) => (
-                  <li
+                  <div
                     key={product.name}
-                    className="rounded-xl border border-slate-200 p-5"
+                    className="grid gap-1 border-b border-line py-5 sm:grid-cols-[9rem_1fr] sm:gap-8"
                   >
-                    <h3 className="text-lg font-semibold text-slate-900">
-                      {product.name}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                    <dt className="text-lg font-semibold">{product.name}</dt>
+                    <dd className="leading-7 text-ink-soft">
                       {product.description}
-                    </p>
-                  </li>
+                    </dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
             </section>
           )}
 
           {service.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="text-2xl font-bold text-slate-900">
-                {section.heading}
-              </h2>
+              <SectionHeading
+                eyebrow={nextEyebrow("Details")}
+                title={section.heading}
+              />
               {section.body && (
-                <p className="mt-4 leading-8 text-slate-700">{section.body}</p>
+                <p className="mt-6 text-[17px] leading-9">{section.body}</p>
               )}
               {section.items && (
-                <ul className="mt-4 list-disc space-y-2.5 pl-5 leading-7 text-slate-700">
+                <ul className="mt-5 border-t border-line">
                   {section.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li
+                      key={item}
+                      className="flex gap-4 border-b border-line py-4 leading-7"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-2.5 size-1.5 shrink-0 bg-accent"
+                      />
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
@@ -115,20 +130,18 @@ export default async function ServiceDetailPage({
 
           {!isCleanroom && (
             <section>
-              <h2 className="text-2xl font-bold text-slate-900">진행 안내</h2>
-              <ol className="mt-6 grid gap-4 sm:grid-cols-2">
+              <SectionHeading
+                eyebrow={nextEyebrow("Process")}
+                title="진행 안내"
+              />
+              <ol className="mt-6 grid gap-px bg-line sm:grid-cols-2">
                 {processSteps.map((step, index) => (
-                  <li
-                    key={step.title}
-                    className="rounded-xl border border-slate-200 p-5"
-                  >
-                    <span className="text-sm font-bold text-brand-600">
-                      STEP {index + 1}
+                  <li key={step.title} className="bg-paper p-6">
+                    <span className="font-mono text-sm font-medium text-accent">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-1 font-semibold text-slate-900">
-                      {step.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-6 text-slate-600">
+                    <h3 className="mt-3 text-lg font-semibold">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-ink-soft">
                       {step.description}
                     </p>
                   </li>
@@ -138,40 +151,67 @@ export default async function ServiceDetailPage({
           )}
         </div>
 
-        <aside className="space-y-8">
-          {related.length > 0 && (
-            <nav aria-label="함께 보면 좋은 제품·서비스">
-              <h2 className="text-lg font-bold text-slate-900">
-                함께 보면 좋은 항목
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {related.map((item) => (
-                  <li key={item.slug}>
-                    <Link
-                      href={servicePath(item.slug)}
-                      className="block rounded-lg border border-slate-200 p-4 transition-shadow hover:shadow-md"
-                    >
-                      <span className="font-semibold text-slate-900">
-                        {item.name}
-                      </span>
-                      <span className="mt-1 block text-sm text-slate-600">
-                        {item.subtitle}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
+        <aside className="lg:col-span-4">
+          <div className="space-y-10 lg:sticky lg:top-28">
+            <div className="border-t-2 border-accent bg-paper-deep p-6">
+              <p className="label">Inquiry</p>
+              <p className="mt-2 font-semibold">{service.name} 문의</p>
+              {phone && (
+                <a
+                  href={`tel:${phone}`}
+                  className="mt-4 block text-2xl font-bold tabular-nums transition-colors hover:text-accent"
+                >
+                  {phone}
+                </a>
+              )}
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex items-center gap-3 bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
+              >
+                온라인 문의
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
 
-          <Link
-            href="/services"
-            className="inline-block text-sm font-semibold text-brand-600 hover:underline"
-          >
-            ← 제품·서비스 전체 보기
-          </Link>
+            {related.length > 0 && (
+              <nav aria-label="함께 보면 좋은 제품·서비스">
+                <p className="label">Related</p>
+                <h2 className="mt-1 text-lg font-bold">함께 보면 좋은 항목</h2>
+                <ul className="mt-4 border-t border-ink">
+                  {related.map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={servicePath(item.slug)}
+                        className="group block border-b border-line py-4 transition-colors hover:bg-paper-deep"
+                      >
+                        <span className="flex items-baseline justify-between gap-3 font-semibold">
+                          {item.name}
+                          <span
+                            aria-hidden="true"
+                            className="transition-transform group-hover:translate-x-1 group-hover:text-accent"
+                          >
+                            →
+                          </span>
+                        </span>
+                        <span className="mt-1 block text-sm text-ink-soft">
+                          {item.subtitle}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+
+            <Link
+              href="/services"
+              className="inline-block text-sm font-semibold text-accent hover:underline"
+            >
+              ← 제품·서비스 전체 보기
+            </Link>
+          </div>
         </aside>
-      </div>
+      </Container>
 
       <ContactCta />
     </>

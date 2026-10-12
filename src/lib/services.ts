@@ -272,6 +272,21 @@ export const services: Service[] = [
   },
 ];
 
+/** 홈 등에서 한눈에 보여 주는 취급 범위 요약 */
+export const capabilities = [
+  { label: "Material", title: "소재", values: ["알루미늄", "SUS403"] },
+  {
+    label: "Process",
+    title: "공정",
+    values: ["주문제작", "용접", "샌딩", "장비 후처리"],
+  },
+  {
+    label: "Supplies",
+    title: "크린룸 물품",
+    values: ["헤어캡", "마스크", "면봉", "장갑 등"],
+  },
+] as const;
+
 export const servicePath = (slug: string) => `/services/${slug}`;
 
 export const getService = (slug: string) =>

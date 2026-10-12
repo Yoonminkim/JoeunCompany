@@ -1,5 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
+import { Container } from "@/components/container";
 import { PageHeader } from "@/components/page-header";
+import { SectionHeading } from "@/components/section-heading";
 import { createMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -15,17 +17,27 @@ export const metadata = createMetadata({
 
 export default function ContactPage() {
   const { phone, fax, email, address } = siteConfig.contact;
-  const hasContact = Boolean(phone || fax || email || address);
   const mapQuery = encodeURIComponent(address);
+
+  const rows = [
+    { label: "TEL", value: phone, href: phone ? `tel:${phone}` : undefined },
+    { label: "FAX", value: fax },
+    {
+      label: "EMAIL",
+      value: email,
+      href: email ? `mailto:${email}` : undefined,
+    },
+    { label: "ADDRESS", value: address },
+  ].filter((row) => row.value);
 
   return (
     <>
       <PageHeader title={title} description={description} path="/contact" />
 
-      <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <h2 className="text-2xl font-bold text-slate-900">온라인 문의</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
+      <Container className="grid gap-14 py-16 lg:grid-cols-12 lg:gap-16 lg:py-20">
+        <div className="lg:col-span-7">
+          <SectionHeading eyebrow="Online inquiry" title="온라인 문의" />
+          <p className="mt-4 text-sm leading-6 text-ink-soft">
             아래 양식을 작성해 주시면 확인 후 입력하신 이메일로 답변드립니다.
           </p>
           <div className="mt-8">
@@ -33,77 +45,63 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <aside>
-          <h2 className="text-2xl font-bold text-slate-900">연락처</h2>
+        <aside className="lg:col-span-5">
+          <SectionHeading eyebrow="Contact" title="연락처" />
 
-          {hasContact ? (
-            <dl className="mt-6 divide-y divide-slate-200 border-y border-slate-200">
-              {phone && (
-                <div className="py-4">
-                  <dt className="text-sm font-semibold text-slate-500">전화</dt>
-                  <dd className="mt-1">
-                    <a
-                      href={`tel:${phone}`}
-                      className="text-brand-600 hover:underline"
-                    >
-                      {phone}
-                    </a>
+          {rows.length > 0 ? (
+            <dl className="mt-4 border-t border-line">
+              {rows.map((row) => (
+                <div
+                  key={row.label}
+                  className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-line py-5"
+                >
+                  <dt className="label pt-1.5">{row.label}</dt>
+                  <dd>
+                    {row.href ? (
+                      <a
+                        href={row.href}
+                        className={`break-all transition-colors hover:text-accent ${
+                          row.label === "TEL"
+                            ? "text-2xl font-bold tabular-nums"
+                            : "font-medium"
+                        }`}
+                      >
+                        {row.value}
+                      </a>
+                    ) : (
+                      <span className="font-medium leading-7">{row.value}</span>
+                    )}
+                    {row.label === "ADDRESS" && (
+                      <span className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                        <a
+                          href={`https://map.naver.com/p/search/${mapQuery}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-accent hover:underline"
+                        >
+                          네이버 지도
+                        </a>
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-accent hover:underline"
+                        >
+                          구글 지도
+                        </a>
+                      </span>
+                    )}
                   </dd>
                 </div>
-              )}
-              {fax && (
-                <div className="py-4">
-                  <dt className="text-sm font-semibold text-slate-500">팩스</dt>
-                  <dd className="mt-1 text-slate-900">{fax}</dd>
-                </div>
-              )}
-              {email && (
-                <div className="py-4">
-                  <dt className="text-sm font-semibold text-slate-500">
-                    이메일
-                  </dt>
-                  <dd className="mt-1">
-                    <a
-                      href={`mailto:${email}`}
-                      className="break-all text-brand-600 hover:underline"
-                    >
-                      {email}
-                    </a>
-                  </dd>
-                </div>
-              )}
-              {address && (
-                <div className="py-4">
-                  <dt className="text-sm font-semibold text-slate-500">주소</dt>
-                  <dd className="mt-1 text-slate-900">{address}</dd>
-                  <dd className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                    <a
-                      href={`https://map.naver.com/p/search/${mapQuery}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-brand-600 hover:underline"
-                    >
-                      네이버 지도
-                    </a>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-brand-600 hover:underline"
-                    >
-                      구글 지도
-                    </a>
-                  </dd>
-                </div>
-              )}
+              ))}
             </dl>
           ) : (
-            <p className="mt-4 text-sm text-slate-600">
+            <p className="mt-6 text-sm text-ink-soft">
               연락처 정보는 준비 중입니다.
             </p>
           )}
         </aside>
-      </section>
+      </Container>
     </>
   );
 }

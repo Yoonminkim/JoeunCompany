@@ -1,6 +1,8 @@
 import { ContactCta } from "@/components/contact-cta";
+import { Container } from "@/components/container";
 import { PageHeader } from "@/components/page-header";
-import { ServiceCard } from "@/components/service-card";
+import { SectionHeading } from "@/components/section-heading";
+import { ServiceRow } from "@/components/service-row";
 import { createMetadata } from "@/lib/seo";
 import { getServicesByCategory } from "@/lib/services";
 
@@ -30,26 +32,25 @@ export default function ServicesPage() {
     <>
       <PageHeader title={title} description={description} path="/services" />
 
-      <div className="mx-auto max-w-6xl space-y-16 px-5 py-16">
-        {groups.map((group) => (
+      <Container className="space-y-20 py-20">
+        {groups.map((group, index) => (
           <section key={group.id} aria-labelledby={`category-${group.id}`}>
-            <h2
+            <SectionHeading
               id={`category-${group.id}`}
-              className="text-2xl font-bold text-slate-900"
-            >
-              {group.label}
-            </h2>
-            <p className="mt-2 text-sm text-slate-600">{group.description}</p>
-            <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              eyebrow={`Category ${String(index + 1).padStart(2, "0")}`}
+              title={group.label}
+            />
+            <p className="mt-3 text-ink-soft">{group.description}</p>
+            <ul className="mt-6 border-t border-line">
               {group.services.map((service) => (
                 <li key={service.slug}>
-                  <ServiceCard service={service} />
+                  <ServiceRow service={service} />
                 </li>
               ))}
             </ul>
           </section>
         ))}
-      </div>
+      </Container>
 
       <ContactCta />
     </>

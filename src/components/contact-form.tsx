@@ -11,7 +11,9 @@ import {
 } from "@/lib/contact";
 
 const inputClass =
-  "mt-1.5 block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/20 aria-invalid:border-red-500";
+  "mt-2 block w-full rounded-none border border-ink/30 bg-white px-3.5 py-3 text-[15px] placeholder:text-ink-soft/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 aria-invalid:border-red-700";
+
+const labelClass = "text-sm font-semibold";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(
@@ -29,30 +31,30 @@ export function ContactForm() {
 
   const fieldError = (field: InquiryField) =>
     errors[field] ? (
-      <p id={`${field}-error`} className="mt-1.5 text-sm text-red-600">
+      <p id={`${field}-error`} className="mt-2 text-sm font-medium text-red-700">
         {errors[field]}
       </p>
     ) : null;
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-6">
       <div aria-live="polite">
         {state.status === "success" && (
-          <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+          <p className="border-l-4 border-accent bg-paper-deep px-4 py-3.5 text-sm font-medium">
             {state.message}
           </p>
         )}
         {state.status === "error" && (
-          <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p className="border-l-4 border-red-700 bg-red-50 px-4 py-3.5 text-sm font-medium text-red-800">
             {state.message}
           </p>
         )}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-sm font-semibold text-slate-800">
-            이름 <span className="text-red-600">*</span>
+          <label htmlFor="name" className={labelClass}>
+            이름 <span className="text-accent">*</span>
           </label>
           <input
             id="name"
@@ -69,10 +71,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="company"
-            className="text-sm font-semibold text-slate-800"
-          >
+          <label htmlFor="company" className={labelClass}>
             회사명
           </label>
           <input
@@ -89,8 +88,8 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" className="text-sm font-semibold text-slate-800">
-            이메일 <span className="text-red-600">*</span>
+          <label htmlFor="email" className={labelClass}>
+            이메일 <span className="text-accent">*</span>
           </label>
           <input
             id="email"
@@ -107,7 +106,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="phone" className="text-sm font-semibold text-slate-800">
+          <label htmlFor="phone" className={labelClass}>
             연락처
           </label>
           <input
@@ -126,8 +125,8 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="type" className="text-sm font-semibold text-slate-800">
-          문의 유형 <span className="text-red-600">*</span>
+        <label htmlFor="type" className={labelClass}>
+          문의 유형 <span className="text-accent">*</span>
         </label>
         <select
           // React 는 <select> 의 defaultValue 변경을 반영하지 않으므로, 오류 후에도
@@ -153,8 +152,8 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="text-sm font-semibold text-slate-800">
-          문의 내용 <span className="text-red-600">*</span>
+        <label htmlFor="message" className={labelClass}>
+          문의 내용 <span className="text-accent">*</span>
         </label>
         <textarea
           id="message"
@@ -172,43 +171,43 @@ export function ContactForm() {
       </div>
 
       {/* 스팸 봇 방지용 숨김 입력란 (사람에게는 보이지 않음) */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+      >
         <label>
           웹사이트
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
-      <fieldset className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-        <legend className="px-1 text-sm font-semibold text-slate-800">
-          개인정보 수집·이용 안내
-        </legend>
-        <dl className="mt-1 space-y-1 text-xs leading-5 text-slate-600">
-          <div className="flex gap-2">
-            <dt className="shrink-0 font-semibold">수집 항목</dt>
+      <fieldset className="border border-line bg-paper-deep p-5">
+        <legend className="label px-2">Privacy · 개인정보 수집·이용 안내</legend>
+        <dl className="space-y-1.5 text-xs leading-5 text-ink-soft">
+          <div className="grid grid-cols-[4.5rem_1fr] gap-3">
+            <dt className="font-semibold text-ink">수집 항목</dt>
             <dd>{privacyNotice.items}</dd>
           </div>
-          <div className="flex gap-2">
-            <dt className="shrink-0 font-semibold">이용 목적</dt>
+          <div className="grid grid-cols-[4.5rem_1fr] gap-3">
+            <dt className="font-semibold text-ink">이용 목적</dt>
             <dd>{privacyNotice.purpose}</dd>
           </div>
-          <div className="flex gap-2">
-            <dt className="shrink-0 font-semibold">보유 기간</dt>
+          <div className="grid grid-cols-[4.5rem_1fr] gap-3">
+            <dt className="font-semibold text-ink">보유 기간</dt>
             <dd>{privacyNotice.retention}</dd>
           </div>
         </dl>
-        <label className="mt-3 flex items-start gap-2 text-sm text-slate-800">
+        <label className="mt-4 flex items-start gap-2.5 text-sm font-medium">
           <input
             type="checkbox"
             name="consent"
             required
             defaultChecked={values.consent === "on"}
-            className="mt-0.5 size-4 rounded border-slate-300"
+            className="mt-0.5 size-4 shrink-0 rounded-none border-ink/40 accent-[#492ea7]"
             {...errorProps("consent")}
           />
           <span>
-            개인정보 수집·이용에 동의합니다.{" "}
-            <span className="text-red-600">*</span>
+            개인정보 수집·이용에 동의합니다. <span className="text-accent">*</span>
           </span>
         </label>
         {fieldError("consent")}
@@ -217,9 +216,16 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex w-full items-center justify-center rounded-lg bg-brand-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-900 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="inline-flex w-full items-center justify-center gap-3 bg-accent px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {pending ? "접수 중..." : "문의 보내기"}
+        {pending ? (
+          "접수 중..."
+        ) : (
+          <>
+            문의 보내기
+            <span aria-hidden="true">→</span>
+          </>
+        )}
       </button>
     </form>
   );
