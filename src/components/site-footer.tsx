@@ -15,7 +15,7 @@ export function SiteFooter() {
             </span>
           </p>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            크린룸 관련 제품과 반도체 후처리 서비스를 제공합니다.
+            반도체 장비 후처리, 금속 주문제작, 크린룸 제품을 취급합니다.
           </p>
         </div>
 

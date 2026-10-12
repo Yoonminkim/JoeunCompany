@@ -6,7 +6,7 @@ export function ContactCta() {
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-12 sm:flex-row sm:items-center">
         <div>
           <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
-            크린룸 제품, 반도체 후처리 상담이 필요하신가요?
+            후처리, 주문제작, 크린룸 제품 상담이 필요하신가요?
           </h2>
           <p className="mt-2 text-slate-600">
             필요한 사양과 수량을 알려 주시면 확인 후 안내드립니다.

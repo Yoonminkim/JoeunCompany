@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ContactCta } from "@/components/contact-cta";
 import { JsonLd } from "@/components/json-ld";
+import { ServiceCard } from "@/components/service-card";
 import { createMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { services } from "@/lib/services";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = createMetadata({
@@ -10,21 +12,6 @@ export const metadata = createMetadata({
   path: "/",
   absoluteTitle: true,
 });
-
-const businessAreas = [
-  {
-    href: "/products",
-    title: "크린룸 관련 제품",
-    description:
-      "반도체를 비롯해 청정 환경이 요구되는 현장에서 사용하는 크린룸 관련 제품을 공급합니다.",
-  },
-  {
-    href: "/semiconductor",
-    title: "반도체 후처리",
-    description:
-      "반도체 공정 이후 단계의 후처리 작업을 제공합니다. 공정과 요구 사양에 맞춰 상담해 드립니다.",
-  },
-];
 
 export default function HomePage() {
   return (
@@ -38,20 +25,23 @@ export default function HomePage() {
             {siteConfig.nameEn} · JJ
           </p>
           <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-            크린룸 관련 제품과
+            반도체 장비 후처리부터
             <br />
-            반도체 후처리, {siteConfig.name}
+            주문제작, 크린룸 제품까지
+            <br />
+            {siteConfig.name}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-blue-100 sm:text-lg">
-            {siteConfig.name}은 반도체 산업 현장에 필요한 크린룸 제품과 반도체
-            후처리 서비스를 제공합니다.
+            {siteConfig.name}은 반도체 장비 후처리, 알루미늄·SUS403 제품
+            주문제작, 용접·샌딩, 그리고 헤어캡·마스크·면봉·장갑 등 크린룸
+            제품을 취급합니다.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/products"
+              href="/services"
               className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand-900 transition-colors hover:bg-blue-50"
             >
-              크린룸 제품 보기
+              제품·서비스 보기
             </Link>
             <Link
               href="/contact"
@@ -64,24 +54,19 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="text-2xl font-bold text-slate-900">사업 분야</h2>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-          {businessAreas.map((area) => (
-            <li key={area.href}>
-              <Link
-                href={area.href}
-                className="block h-full rounded-xl border border-slate-200 p-6 transition-shadow hover:shadow-md"
-              >
-                <h3 className="text-lg font-semibold text-slate-900">
-                  {area.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
-                  {area.description}
-                </p>
-                <span className="mt-4 inline-block text-sm font-semibold text-brand-600">
-                  자세히 보기 →
-                </span>
-              </Link>
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-bold text-slate-900">제품·서비스</h2>
+          <Link
+            href="/services"
+            className="text-sm font-semibold text-brand-600 hover:underline"
+          >
+            전체 보기 →
+          </Link>
+        </div>
+        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <li key={service.slug}>
+              <ServiceCard service={service} />
             </li>
           ))}
         </ul>
