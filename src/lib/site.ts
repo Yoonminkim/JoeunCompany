@@ -57,10 +57,23 @@ export const siteConfig = {
 
   /** 외부 노출 연락처. 비워 두면 화면/JSON-LD 에서 자동으로 생략됩니다. */
   contact: {
-    phone: "",
+    phone: "02-478-3514",
+    fax: "02-478-3525",
     email: "",
-    address: "",
-  } as { phone: string; email: string; address: string },
+    address: "서울특별시 송파구 올림픽로51길 32, B1",
+    /** 구조화 데이터(PostalAddress)용 주소 구성요소 */
+    addressParts: {
+      region: "서울특별시",
+      locality: "송파구",
+      street: "올림픽로51길 32, B1",
+    },
+  } as {
+    phone: string;
+    fax: string;
+    email: string;
+    address: string;
+    addressParts?: { region: string; locality: string; street: string };
+  },
 
   /** 공식 SNS·블로그·네이버 플레이스 등 URL (JSON-LD sameAs 에 사용) */
   sameAs: [] as string[],

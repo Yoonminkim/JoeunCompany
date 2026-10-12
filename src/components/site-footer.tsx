@@ -32,7 +32,7 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        {(contact.phone || contact.email || contact.address) && (
+        {(contact.phone || contact.fax || contact.email || contact.address) && (
           <address className="text-sm not-italic leading-6 text-slate-600">
             <p className="text-sm font-semibold text-slate-900">연락처</p>
             <ul className="mt-2 space-y-1.5">
@@ -55,6 +55,7 @@ export function SiteFooter() {
                   </a>
                 </li>
               )}
+              {contact.fax && <li>팩스 {contact.fax}</li>}
               {contact.address && <li>{contact.address}</li>}
             </ul>
           </address>
