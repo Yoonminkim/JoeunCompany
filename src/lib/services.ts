@@ -35,6 +35,21 @@ export type ServiceSection = {
   items?: string[];
 };
 
+export type ServiceImage = {
+  /** public 기준 경로 */
+  src: string;
+  /** 대체 텍스트. 참고용 이미지라는 점이 드러나게 작성합니다. */
+  alt: string;
+  width: number;
+  height: number;
+  /** 출처 기록 (아래 라이선스상 표기 의무는 없지만 추적을 위해 남깁니다) */
+  credit: string;
+  source: string;
+  license: string;
+  /** 실제 취급 제품과 형태/색상이 다른 유사 이미지이면 true (화면에 "유사 예시"로 표시) */
+  approximate?: boolean;
+};
+
 export type Service = {
   /** URL 경로. /services/{slug} (영문 소문자와 하이픈 권장, 공개 후에는 변경하지 않는 것이 좋습니다) */
   slug: string;
@@ -45,11 +60,13 @@ export type Service = {
   subtitle: string;
   /** 목록 카드용 한두 문장 요약. seo.description 의 기본값으로도 쓰입니다. */
   summary: string;
+  /** 대표 이미지 (1600×700, 21:9). 회사의 실제 사진이 생기면 교체하세요. */
+  image: ServiceImage;
   /** 본문 소개 단락 */
   intro: string[];
   sections: ServiceSection[];
-  /** 취급 품목 (물품형 항목용) */
-  products?: { name: string; description: string }[];
+  /** 취급 품목 (물품형 항목용). image 는 800×600(4:3) 예시 이미지 */
+  products?: { name: string; description: string; image?: ServiceImage }[];
   /** 함께 보면 좋은 항목의 slug */
   related: string[];
   /** 검색엔진/공유용 SEO 설정. 생략한 값은 name / summary 로 대체됩니다. */
@@ -83,10 +100,143 @@ export const processSteps = [
   },
 ] as const;
 
+const stockPhoto = (
+  file: string,
+  alt: string,
+  credit: string,
+  source: string,
+  license: string,
+): ServiceImage => ({
+  src: `/images/${file}.jpg`,
+  alt,
+  width: 1600,
+  height: 700,
+  credit,
+  source,
+  license,
+});
+
+/**
+ * 참고용 스톡 이미지 (모두 상업적 이용 가능, 출처 표기 의무 없음).
+ * 회사의 실제 작업 사진이 아니므로 대체 텍스트와 캡션에서 "참고 이미지"로 표시합니다.
+ */
+export const images = {
+  cleanroomFab: stockPhoto(
+    "cleanroom-fab",
+    "반도체 크린룸에서 장비를 다루는 작업자 (참고 이미지)",
+    "NASA Glenn Research Center (via Wikimedia Commons)",
+    "https://commons.wikimedia.org/wiki/File:Clean_room.jpg",
+    "Public domain (NASA)",
+  ),
+  corridor: stockPhoto(
+    "cleanroom-corridor",
+    "밝고 청결한 크린룸 복도 (참고 이미지)",
+    "Tima Miroshnichenko (Pexels)",
+    "https://www.pexels.com/photo/man-technology-tiles-white-9574538/",
+    "Pexels License",
+  ),
+  fabrication: stockPhoto(
+    "fabrication-cutting",
+    "금속 판재를 절단하는 장면 (참고 이미지)",
+    "Ana Victoria Valverde (Pexels)",
+    "https://www.pexels.com/photo/plasma-cutting-in-factory-17180807/",
+    "Pexels License",
+  ),
+  welding: stockPhoto(
+    "welding",
+    "금속을 용접하는 장면 (참고 이미지)",
+    "Valentin Saumon (Pexels)",
+    "https://www.pexels.com/photo/a-person-wearing-a-protective-head-shield-welding-metals-9130186/",
+    "Pexels License",
+  ),
+  sanding: stockPhoto(
+    "sanding-grinder",
+    "그라인더로 금속 표면을 연마하는 장면 (참고 이미지)",
+    "Guduru Ajay bhargav (Pexels)",
+    "https://www.pexels.com/photo/person-using-green-and-grey-angle-grinder-on-sheet-of-metal-977526/",
+    "Pexels License",
+  ),
+  supplies: stockPhoto(
+    "cleanroom-supplies",
+    "마스크와 장갑 등 크린룸 소모품 (참고 이미지)",
+    "Polina Tankilevitch (Pexels)",
+    "https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/",
+    "Pexels License",
+  ),
+} as const;
+
+const productPhoto = (
+  file: string,
+  alt: string,
+  credit: string,
+  source: string,
+  license: string,
+  approximate = false,
+): ServiceImage => ({
+  src: `/images/products/${file}.jpg`,
+  alt,
+  width: 800,
+  height: 600,
+  credit,
+  source,
+  license,
+  ...(approximate ? { approximate } : {}),
+});
+
+/** 취급 품목별 예시 이미지 (스톡 사진). 실제 제품 사진이 생기면 같은 이름으로 교체하세요. */
+const productImages = {
+  haircap: productPhoto(
+    "haircap",
+    "헤어캡 예시 이미지 (청록색, 실제 제품과 다를 수 있음)",
+    "kaboompics.com (Pexels)",
+    "https://www.pexels.com/photo/person-holding-a-bouffant-cap-8538701/",
+    "Pexels License",
+    true,
+  ),
+  mask: productPhoto(
+    "mask-white",
+    "흰색 일회용 마스크 예시 이미지",
+    "Media Studio Hong Kong (Pexels)",
+    "https://www.pexels.com/photo/a-white-face-mask-on-a-white-surface-8264728/",
+    "Pexels License",
+  ),
+  swab: productPhoto(
+    "swab-clean",
+    "면봉 예시 이미지 (일반 면봉, 실제 제품과 다를 수 있음)",
+    "Daniel Dan (Pexels)",
+    "https://www.pexels.com/photo/close-up-shot-of-cotton-buds-7612836/",
+    "Pexels License",
+    true,
+  ),
+  gloveCotton: productPhoto(
+    "glove-cotton",
+    "목장갑 예시 이미지 (코팅 장갑 사진, 실제 제품과 다를 수 있음)",
+    "gadaji66 (Pixabay)",
+    "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
+    "Pixabay Content License",
+    true,
+  ),
+  gloveCoated: productPhoto(
+    "glove-coated",
+    "반코팅 목장갑 예시 이미지",
+    "gadaji66 (Pixabay)",
+    "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
+    "Pixabay Content License",
+  ),
+  gloveNitrile: productPhoto(
+    "glove-nitrile",
+    "니트릴 장갑 예시 이미지",
+    "Callum Hilton (Pexels)",
+    "https://www.pexels.com/photo/a-pair-of-blue-latex-gloves-7856715/",
+    "Pexels License",
+  ),
+} as const;
+
 export const services: Service[] = [
   {
     slug: "semiconductor-equipment-post-processing",
     category: "semiconductor",
+    image: images.cleanroomFab,
     name: "반도체 장비 후처리",
     subtitle: "반도체 장비 제품의 가공 이후 마감과 표면 정리",
     summary:
@@ -122,6 +272,7 @@ export const services: Service[] = [
   {
     slug: "custom-metal-fabrication",
     category: "fabrication",
+    image: images.fabrication,
     name: "알루미늄·SUS403 제품 주문제작",
     subtitle: "도면과 사양에 맞춘 금속 제품 주문제작",
     summary:
@@ -163,6 +314,7 @@ export const services: Service[] = [
   {
     slug: "welding",
     category: "fabrication",
+    image: images.welding,
     name: "용접",
     subtitle: "소재와 형상에 맞춘 금속 용접",
     summary:
@@ -192,6 +344,7 @@ export const services: Service[] = [
   {
     slug: "sanding",
     category: "fabrication",
+    image: images.sanding,
     name: "샌딩",
     subtitle: "표면 상태를 고르게 정리하는 샌딩 작업",
     summary:
@@ -220,6 +373,7 @@ export const services: Service[] = [
   {
     slug: "cleanroom-products",
     category: "cleanroom",
+    image: images.supplies,
     name: "크린룸 제품",
     subtitle: "헤어캡·마스크·면봉·장갑 등 크린룸 소모품",
     summary:
@@ -232,20 +386,37 @@ export const services: Service[] = [
         name: "헤어캡",
         description:
           "작업자의 머리카락과 비듬 등이 작업 환경으로 떨어지는 것을 줄이기 위해 착용하는 용품입니다.",
+        image: productImages.haircap,
       },
       {
         name: "마스크",
         description:
           "작업자의 호흡과 비말 등이 작업 환경에 영향을 주는 것을 줄이기 위해 착용하는 용품입니다.",
+        image: productImages.mask,
       },
       {
-        name: "면봉",
-        description: "좁은 부위의 닦기와 청소에 사용하는 크린룸용 소모품입니다.",
-      },
-      {
-        name: "장갑",
+        name: "클린면봉",
         description:
-          "손에서 발생하는 오염과 이물을 줄이기 위해 착용하는 용품입니다.",
+          "좁은 부위의 닦기와 청소에 사용하는 크린룸용 면봉입니다.",
+        image: productImages.swab,
+      },
+      {
+        name: "목장갑",
+        description:
+          "면사로 짜서 만든 작업용 장갑으로, 일반 작업 시 손을 보호하는 데 사용합니다.",
+        image: productImages.gloveCotton,
+      },
+      {
+        name: "반코팅 목장갑",
+        description:
+          "목장갑의 손바닥 쪽에 코팅을 입혀 미끄럼을 줄이고 내구성을 높인 작업용 장갑입니다.",
+        image: productImages.gloveCoated,
+      },
+      {
+        name: "니트릴 장갑",
+        description:
+          "니트릴 소재의 일회용 장갑으로, 손에서 발생하는 오염과 이물을 줄이기 위해 착용합니다.",
+        image: productImages.gloveNitrile,
       },
     ],
     sections: [
@@ -256,9 +427,9 @@ export const services: Service[] = [
     ],
     related: ["semiconductor-equipment-post-processing"],
     seo: {
-      title: "크린룸 제품 - 헤어캡·마스크·면봉·장갑",
+      title: "크린룸 제품 - 헤어캡·마스크·클린면봉·장갑",
       description:
-        "크린룸(클린룸)에서 사용하는 헤어캡, 마스크, 면봉, 장갑 등 크린룸 소모품을 취급합니다. 필요한 품목과 규격을 조은상사에 문의하세요.",
+        "크린룸(클린룸)에서 사용하는 헤어캡, 마스크, 클린면봉, 목장갑, 반코팅 목장갑, 니트릴 장갑 등 크린룸 소모품을 취급합니다. 필요한 품목과 규격을 조은상사에 문의하세요.",
       keywords: [
         "크린룸 제품",
         "클린룸 제품",
@@ -266,7 +437,11 @@ export const services: Service[] = [
         "크린룸 헤어캡",
         "크린룸 마스크",
         "크린룸 면봉",
+        "클린면봉",
         "크린룸 장갑",
+        "목장갑",
+        "반코팅 목장갑",
+        "니트릴 장갑",
       ],
     },
   },
@@ -283,7 +458,7 @@ export const capabilities = [
   {
     label: "Supplies",
     title: "크린룸 물품",
-    values: ["헤어캡", "마스크", "면봉", "장갑 등"],
+    values: ["헤어캡", "마스크", "클린면봉", "목장갑·니트릴 장갑 등"],
   },
 ] as const;
 

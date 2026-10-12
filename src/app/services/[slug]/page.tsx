@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContactCta } from "@/components/contact-cta";
 import { Container } from "@/components/container";
 import { JsonLd } from "@/components/json-ld";
 import { PageHeader } from "@/components/page-header";
+import { Photo } from "@/components/photo";
 import { SectionHeading } from "@/components/section-heading";
 import { createMetadata, serviceJsonLd } from "@/lib/seo";
 import {
@@ -67,6 +69,10 @@ export default async function ServiceDetailPage({
         eyebrow={categoryLabel !== service.name ? categoryLabel : undefined}
       />
 
+      <Container className="pt-12">
+        <Photo image={service.image} priority />
+      </Container>
+
       <Container className="grid gap-14 py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
         <div className="space-y-16 lg:col-span-8">
           <section>
@@ -84,19 +90,43 @@ export default async function ServiceDetailPage({
           {service.products && service.products.length > 0 && (
             <section>
               <SectionHeading eyebrow={nextEyebrow("Items")} title="취급 품목" />
-              <dl className="mt-4 border-t border-line">
+              <p className="mt-4 text-sm leading-6 text-ink-soft">
+                사진은 이해를 돕기 위한 예시 이미지이며, 실제 제품과 색상·형태가
+                다를 수 있습니다. 규격과 사양은 문의해 주세요.
+              </p>
+              <ul className="mt-4 border-t border-line">
                 {service.products.map((product) => (
-                  <div
+                  <li
                     key={product.name}
-                    className="grid gap-1 border-b border-line py-5 sm:grid-cols-[9rem_1fr] sm:gap-8"
+                    className="grid grid-cols-[7rem_minmax(0,1fr)] gap-5 border-b border-line py-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8"
                   >
-                    <dt className="text-lg font-semibold">{product.name}</dt>
-                    <dd className="leading-7 text-ink-soft">
-                      {product.description}
-                    </dd>
-                  </div>
+                    <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
+                      {product.image && (
+                        <Image
+                          src={product.image.src}
+                          alt={product.image.alt}
+                          fill
+                          sizes="(min-width: 640px) 160px, 112px"
+                          className="object-cover"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold">{product.name}</h3>
+                      <p className="mt-2 leading-7 text-ink-soft">
+                        {product.description}
+                      </p>
+                      {product.image && (
+                        <p className="label mt-3 !text-[10px]">
+                          {product.image.approximate
+                            ? "Similar example · 유사 예시 이미지"
+                            : "Example image · 예시 이미지"}
+                        </p>
+                      )}
+                    </div>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </section>
           )}
 

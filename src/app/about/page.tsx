@@ -21,7 +21,6 @@ const { phone, fax, address } = siteConfig.contact;
 const overview = [
   { label: "상호", value: siteConfig.name },
   { label: "영문명", value: siteConfig.nameEn },
-  { label: "약칭", value: "JJ" },
   { label: "사업 분야", value: services.map((s) => s.name).join(", ") },
   ...(address ? [{ label: "소재지", value: address }] : []),
   ...(phone ? [{ label: "전화", value: phone }] : []),

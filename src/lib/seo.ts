@@ -144,6 +144,7 @@ export function serviceJsonLd(service: Service) {
     serviceType: service.name,
     description: service.seo.description ?? service.summary,
     url,
+    image: `${siteConfig.url}${service.image.src}`,
     provider: { "@id": `${siteConfig.url}/#organization` },
     ...(service.products && service.products.length > 0
       ? {
@@ -156,6 +157,9 @@ export function serviceJsonLd(service: Service) {
                 "@type": "Product",
                 name: product.name,
                 description: product.description,
+                ...(product.image
+                  ? { image: `${siteConfig.url}${product.image.src}` }
+                  : {}),
               },
             })),
           },
