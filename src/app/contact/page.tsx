@@ -14,8 +14,9 @@ export const metadata = createMetadata({
 });
 
 export default function ContactPage() {
-  const { phone, email, address } = siteConfig.contact;
-  const hasContact = Boolean(phone || email || address);
+  const { phone, fax, email, address } = siteConfig.contact;
+  const hasContact = Boolean(phone || fax || email || address);
+  const mapQuery = encodeURIComponent(address);
 
   return (
     <>
@@ -50,6 +51,12 @@ export default function ContactPage() {
                   </dd>
                 </div>
               )}
+              {fax && (
+                <div className="py-4">
+                  <dt className="text-sm font-semibold text-slate-500">팩스</dt>
+                  <dd className="mt-1 text-slate-900">{fax}</dd>
+                </div>
+              )}
               {email && (
                 <div className="py-4">
                   <dt className="text-sm font-semibold text-slate-500">
@@ -69,6 +76,24 @@ export default function ContactPage() {
                 <div className="py-4">
                   <dt className="text-sm font-semibold text-slate-500">주소</dt>
                   <dd className="mt-1 text-slate-900">{address}</dd>
+                  <dd className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                    <a
+                      href={`https://map.naver.com/p/search/${mapQuery}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-brand-600 hover:underline"
+                    >
+                      네이버 지도
+                    </a>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-brand-600 hover:underline"
+                    >
+                      구글 지도
+                    </a>
+                  </dd>
                 </div>
               )}
             </dl>

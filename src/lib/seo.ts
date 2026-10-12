@@ -63,6 +63,9 @@ export function createMetadata({
 
 const absoluteUrl = (path: string) => `${siteConfig.url}${path === "/" ? "" : path}`;
 
+/** 국내 번호(02-478-3514)를 구조화 데이터 권장 형식(+82-2-478-3514)으로 변환 */
+const toInternationalPhone = (phone: string) => phone.replace(/^0/, "+82-");
+
 /** 회사(조직) 구조화 데이터 */
 export function organizationJsonLd() {
   const { contact, sameAs } = siteConfig;
@@ -77,13 +80,20 @@ export function organizationJsonLd() {
     logo: `${siteConfig.url}/logo.png`,
     description: siteConfig.description,
     knowsAbout: services.map((service) => service.name),
-    ...(contact.phone ? { telephone: contact.phone } : {}),
+    ...(contact.phone ? { telephone: toInternationalPhone(contact.phone) } : {}),
+    ...(contact.fax ? { faxNumber: toInternationalPhone(contact.fax) } : {}),
     ...(contact.email ? { email: contact.email } : {}),
     ...(contact.address
       ? {
           address: {
             "@type": "PostalAddress",
-            streetAddress: contact.address,
+            ...(contact.addressParts
+              ? {
+                  addressRegion: contact.addressParts.region,
+                  addressLocality: contact.addressParts.locality,
+                  streetAddress: contact.addressParts.street,
+                }
+              : { streetAddress: contact.address }),
             addressCountry: "KR",
           },
         }
