@@ -45,15 +45,16 @@ seo: {
 
 ## 배포 전 체크리스트
 
-1. **도메인 설정** – `NEXT_PUBLIC_SITE_URL` 환경변수에 실제 도메인을 넣습니다. (`.env.example` 참고)
-   빌드 시점에 반영되므로 배포 환경에도 빌드 전에 등록해야 합니다.
-2. **연락처 입력** – `src/lib/site.ts` 의 `contact` (전화/이메일/주소). 입력하면 푸터·문의 페이지·JSON-LD 에 자동 반영됩니다.
+1. **도메인 연결** – 공식 도메인은 `joeunill.com` 이며 프로덕션 빌드의 기준 URL 로 이미 설정돼 있습니다. (`src/lib/site.ts`)
+   배포 후 호스팅에 `joeunill.com` 을 연결하고 DNS 를 설정하세요. `www.joeunill.com` 은 `joeunill.com` 으로 리다이렉트하는 것을 권장합니다.
+   (다른 주소로 빌드하려면 `NEXT_PUBLIC_SITE_URL` 환경변수를 사용)
+2. **연락처** – `src/lib/site.ts` 의 `contact` (전화/팩스/이메일/주소). 푸터·문의 페이지·JSON-LD 에 자동 반영됩니다. 현재 대표 이메일은 `joeunill1@naver.com` 입니다.
 3. **콘텐츠 확정** – `src/lib/services.ts` 의 설명 문구는 초안입니다. 실제 작업 범위·규격·가능 소재에 맞게 확인/수정하세요.
 4. **이미지 확인** – 로고 원본이 바뀌면 `public/brand/` 의 파일과 OG 이미지, 파비콘을 다시 생성해야 합니다. 벡터(SVG) 원본이 있으면 더 선명하게 쓸 수 있습니다.
 5. **문의 폼 메일 설정** – 아래 환경변수를 등록해야 프로덕션에서 문의가 접수됩니다. 미설정 시 폼은 "접수 불가" 안내를 보여 줍니다.
-   - `RESEND_API_KEY`: [Resend](https://resend.com) API 키
-   - `CONTACT_TO_EMAIL`: 문의를 받을 이메일 (쉼표로 여러 명 가능)
-   - `CONTACT_FROM_EMAIL`: 발신자 (Resend에서 도메인 인증 후 사용)
+   - `RESEND_API_KEY`: [Resend](https://resend.com) API 키 (필수)
+   - `CONTACT_TO_EMAIL`: 문의를 받을 이메일 (선택, 쉼표로 여러 명 가능). 비워 두면 대표 이메일로 받습니다.
+   - `CONTACT_FROM_EMAIL`: 발신자 (선택). Resend 에서 `joeunill.com` 도메인을 인증한 뒤 `조은상사 홈페이지 <noreply@joeunill.com>` 형태로 사용하세요.
    - 개인정보 수집·이용 안내 문구는 `src/lib/contact.ts` 의 `privacyNotice` 에 있으며, 회사 방침에 맞게 확인이 필요합니다.
 6. **검색엔진 등록**
    - Google Search Console: 소유 확인 후 `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` 설정, `/sitemap.xml` 제출
