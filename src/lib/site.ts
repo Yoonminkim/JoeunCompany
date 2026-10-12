@@ -3,15 +3,21 @@
  * 회사 정보가 확정되면 이 파일만 수정하면 됩니다.
  */
 
-/** 배포 도메인. 확정되면 NEXT_PUBLIC_SITE_URL 환경변수에 넣어 주세요. (예: https://joeun.co.kr) */
+/** 공식 도메인 (www 없는 주소가 기준. www 는 이 주소로 리다이렉트해 주세요) */
+const PRODUCTION_URL = "https://joeunill.com";
+
+/**
+ * 사이트 기준 URL (canonical, sitemap, Open Graph, JSON-LD 에 사용).
+ * NEXT_PUBLIC_SITE_URL 로 덮어쓸 수 있고, 지정하지 않으면
+ * 프로덕션 빌드는 공식 도메인, 개발 모드는 localhost 를 사용합니다.
+ */
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit.replace(/\/$/, "");
 
-  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercelProduction) return `https://${vercelProduction}`;
-
-  return "http://localhost:3000";
+  return process.env.NODE_ENV === "production"
+    ? PRODUCTION_URL
+    : "http://localhost:3000";
 }
 
 /** Vercel 프리뷰 배포가 검색에 노출되지 않도록, 프로덕션(또는 비-Vercel 환경)에서만 색인 허용 */
@@ -59,7 +65,7 @@ export const siteConfig = {
   contact: {
     phone: "02-478-3514",
     fax: "02-478-3525",
-    email: "",
+    email: "joeunill1@naver.com",
     address: "서울특별시 송파구 올림픽로51길 32, B1",
     /** 구조화 데이터(PostalAddress)용 주소 구성요소 */
     addressParts: {

@@ -1,4 +1,5 @@
 import { inquiryTypes, type Inquiry } from "./contact";
+import { siteConfig } from "./site";
 
 export type SendResult =
   | { ok: true }
@@ -9,14 +10,15 @@ export type SendResult =
  *
  * 필요한 환경변수
  *  - RESEND_API_KEY       : Resend API 키
- *  - CONTACT_TO_EMAIL     : 문의를 받을 담당자 이메일 (쉼표로 여러 명 가능)
- *  - CONTACT_FROM_EMAIL   : (선택) 발신자. 인증된 도메인 주소여야 합니다.
+ *  - CONTACT_TO_EMAIL     : (선택) 문의를 받을 이메일, 쉼표로 여러 명 가능.
+ *                           비워 두면 사이트 대표 이메일(siteConfig.contact.email)로 받습니다.
+ *  - CONTACT_FROM_EMAIL   : (선택) 발신자. Resend 에서 인증한 도메인 주소여야 합니다.
  *
  * 다른 메일/알림 수단(SMTP, Slack 등)을 쓰려면 이 함수만 교체하면 됩니다.
  */
 export async function sendInquiryMail(inquiry: Inquiry): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL || siteConfig.contact.email;
 
   if (!apiKey || !to) {
     // 개발 중에는 서버 콘솔에서 내용을 확인할 수 있게 하고, 프로덕션에서는 실패로 처리
