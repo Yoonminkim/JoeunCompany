@@ -203,6 +203,36 @@ const productImages = {
     "Pexels License",
     true,
   ),
+  teflon: productPhoto(
+    "teflon",
+    "테프론(PTFE) 제작품",
+    "bing-lab (Pixabay)",
+    "https://pixabay.com/photos/laboratory-chemistry-teflon-7978199/",
+    "Pixabay Content License",
+    true,
+  ),
+  ceramic: productPhoto(
+    "ceramic",
+    "세라믹 부품",
+    "Retired electrician (Wikimedia Commons)",
+    "https://commons.wikimedia.org/wiki/File:Locktal_ceramic_tube_socket_01.jpg",
+    "CC0 (Public domain)",
+  ),
+  tape: productPhoto(
+    "tape-special",
+    "특수 테이프",
+    "Ksenia Chernaya (Pexels)",
+    "https://www.pexels.com/photo/masking-tapes-on-table-against-white-wall-5691615/",
+    "Pexels License",
+    true,
+  ),
+  chemicals: productPhoto(
+    "chemicals",
+    "각종 약품",
+    "Ivan S (Pexels)",
+    "https://www.pexels.com/photo/brown-bottles-on-white-wooden-shelf-9628834/",
+    "Pexels License",
+  ),
 } as const;
 
 export const services: Service[] = [
@@ -372,21 +402,25 @@ export const services: Service[] = [
         name: "테프론(PTFE) 제작",
         description:
           "PTFE(테프론) 소재를 도면과 사양에 맞춰 제작합니다. 내화학성과 내열성이 필요하고 마찰이 적어야 하는 부품과 제품에 사용됩니다.",
+        image: productImages.teflon,
       },
       {
         name: "세라믹 제작",
         description:
           "세라믹 소재 제품을 도면과 사양에 맞춰 제작합니다. 내열성, 내마모성, 절연성이 요구되는 부품에 사용됩니다.",
+        image: productImages.ceramic,
       },
       {
         name: "특수 테이프",
         description:
           "사용 환경과 용도에 맞는 특수 테이프를 공급합니다. 소재와 접착 방식, 사용 온도 등 필요한 사양을 알려 주시면 상담해 드립니다.",
+        image: productImages.tape,
       },
       {
         name: "각종 약품",
         description:
           "현장에서 사용하는 각종 약품을 취급합니다. 품목과 용도, 수량에 맞춰 상담해 드립니다.",
+        image: productImages.chemicals,
       },
     ],
     sections: [

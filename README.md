@@ -81,9 +81,13 @@ seo: {
 | --- | --- | --- | --- |
 | `mask-white.jpg` | 마스크 | [Media Studio Hong Kong / Pexels](https://www.pexels.com/photo/a-white-face-mask-on-a-white-surface-8264728/) | Pexels License |
 | `swab-clean.jpg` | 클린면봉 (일반 면봉, 실제와 다름) | [Daniel Dan / Pexels](https://www.pexels.com/photo/close-up-shot-of-cotton-buds-7612836/) | Pexels License |
+| `teflon.jpg` | 테프론(PTFE) 제작 (불소수지 병, 실제와 다름) | [bing-lab / Pixabay](https://pixabay.com/photos/laboratory-chemistry-teflon-7978199/) | Pixabay Content License |
+| `ceramic.jpg` | 세라믹 제작 (세라믹 부품) | [Retired electrician / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Locktal_ceramic_tube_socket_01.jpg) | CC0 |
+| `tape-special.jpg` | 특수 테이프 (일반 테이프, 실제와 다름) | [Ksenia Chernaya / Pexels](https://www.pexels.com/photo/masking-tapes-on-table-against-white-wall-5691615/) | Pexels License |
+| `chemicals.jpg` | 각종 약품 | [Ivan S / Pexels](https://www.pexels.com/photo/brown-bottles-on-white-wooden-shelf-9628834/) | Pexels License |
 
 "실제와 다름"으로 표시한 이미지는 실제 취급 제품과 색상·형태가 다른 스톡 사진입니다. (화면에는 표시되지 않음)
-테프론(PTFE) 제작, 세라믹 제작, 특수 테이프, 각종 약품은 아직 이미지가 없어 번호 타일로 표시됩니다. 이미지를 추가하려면 `src/lib/services.ts` 의 `productImages` 에 항목을 만들고 해당 품목의 `image` 에 연결하세요.
+이미지가 없는 품목은 번호 타일로 표시됩니다. 이미지를 추가하려면 `src/lib/services.ts` 의 `productImages` 에 항목을 만들고 해당 품목의 `image` 에 연결하세요.
 실제 제품 사진이 생기면 같은 파일명으로 교체하고 `src/lib/services.ts` 의 `approximate` 값을 제거하세요.
 
 실제 작업 사진으로 교체할 때는 같은 비율(1600×700, 21:9)의 이미지를 `public/images/` 에 넣고
