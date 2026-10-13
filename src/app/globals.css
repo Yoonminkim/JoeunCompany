@@ -204,3 +204,13 @@ body {
     }
   }
 }
+
+/* 상단 메뉴: 항목을 클릭하면 팝업을 닫습니다 (마우스가 메뉴 위에 남아 있어도 닫힘 유지) */
+.nav-item[data-dismissed="true"] .nav-panel {
+  visibility: hidden;
+  opacity: 0;
+  transition-delay: 0s;
+}
+.nav-item[data-dismissed="true"] .nav-caret {
+  transform: none;
+}
