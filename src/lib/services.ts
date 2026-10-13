@@ -24,8 +24,8 @@ export const serviceCategories: Record<
     description: "알루미늄·SUS403 제품 주문제작과 용접, 샌딩 작업",
   },
   cleanroom: {
-    label: "크린룸 제품",
-    description: "헤어캡, 마스크, 면봉, 장갑 등 크린룸 소모품",
+    label: "크린룸 관련 제품",
+    description: "크린룸 소모품, 테프론·세라믹 제작, 특수 테이프, 각종 약품",
   },
 };
 
@@ -161,7 +161,7 @@ export const images = {
   ),
   supplies: stockPhoto(
     "cleanroom-supplies",
-    "마스크와 장갑 등 크린룸 소모품",
+    "마스크 등 크린룸 소모품",
     "Polina Tankilevitch (Pexels)",
     "https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/",
     "Pexels License",
@@ -188,14 +188,6 @@ const productPhoto = (
 
 /** 취급 품목별 이미지 (스톡 사진). 실제 제품 사진이 생기면 같은 이름으로 교체하세요. */
 const productImages = {
-  haircap: productPhoto(
-    "haircap",
-    "헤어캡",
-    "kaboompics.com (Pexels)",
-    "https://www.pexels.com/photo/person-holding-a-bouffant-cap-8538701/",
-    "Pexels License",
-    true,
-  ),
   mask: productPhoto(
     "mask-white",
     "흰색 일회용 마스크",
@@ -210,28 +202,6 @@ const productImages = {
     "https://www.pexels.com/photo/close-up-shot-of-cotton-buds-7612836/",
     "Pexels License",
     true,
-  ),
-  gloveCotton: productPhoto(
-    "glove-cotton",
-    "목장갑",
-    "gadaji66 (Pixabay)",
-    "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
-    "Pixabay Content License",
-    true,
-  ),
-  gloveCoated: productPhoto(
-    "glove-coated",
-    "반코팅 목장갑",
-    "gadaji66 (Pixabay)",
-    "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
-    "Pixabay Content License",
-  ),
-  gloveNitrile: productPhoto(
-    "glove-nitrile",
-    "니트릴 장갑",
-    "Callum Hilton (Pexels)",
-    "https://www.pexels.com/photo/a-pair-of-blue-latex-gloves-7856715/",
-    "Pexels License",
   ),
 } as const;
 
@@ -377,20 +347,15 @@ export const services: Service[] = [
     slug: "cleanroom-products",
     category: "cleanroom",
     image: images.supplies,
-    name: "크린룸 제품",
-    subtitle: "헤어캡·마스크·면봉·장갑 등 크린룸 소모품",
+    name: "크린룸 관련 제품",
+    subtitle: "마스크·면봉부터 테프론·세라믹 제작, 특수 테이프, 각종 약품까지",
     summary:
-      "크린룸 작업 환경에서 사용하는 헤어캡, 마스크, 면봉, 장갑 등 크린룸 소모품을 취급합니다.",
+      "크린룸과 반도체 현장에서 필요한 마스크, 면봉, 테프론(PTFE)·세라믹 제작품, 특수 테이프, 각종 약품을 취급합니다.",
     intro: [
-      "크린룸에서는 작업자와 소모품에서 발생하는 먼지와 이물이 제품 품질에 영향을 줄 수 있습니다. 조은상사는 반도체를 비롯한 청정 환경 현장에서 사용하는 헤어캡, 마스크, 면봉, 장갑 등 크린룸(클린룸) 제품을 취급합니다.",
+      "크린룸(클린룸)과 반도체 현장에서는 소모품부터 소재 가공품, 부자재, 약품까지 다양한 품목이 필요합니다. 조은상사는 마스크와 면봉 같은 크린룸 소모품, 테프론(PTFE)과 세라믹 제작, 특수 테이프, 각종 약품을 취급합니다.",
+      "필요한 품목과 사양을 알려 주시면 용도와 사용 환경에 맞춰 상담해 드립니다.",
     ],
     products: [
-      {
-        name: "헤어캡",
-        description:
-          "작업자의 머리카락과 비듬 등이 작업 환경으로 떨어지는 것을 줄이기 위해 착용하는 용품입니다.",
-        image: productImages.haircap,
-      },
       {
         name: "마스크",
         description:
@@ -404,47 +369,58 @@ export const services: Service[] = [
         image: productImages.swab,
       },
       {
-        name: "목장갑",
+        name: "테프론(PTFE) 제작",
         description:
-          "면사로 짜서 만든 작업용 장갑으로, 일반 작업 시 손을 보호하는 데 사용합니다.",
-        image: productImages.gloveCotton,
+          "PTFE(테프론) 소재를 도면과 사양에 맞춰 제작합니다. 내화학성과 내열성이 필요하고 마찰이 적어야 하는 부품과 제품에 사용됩니다.",
       },
       {
-        name: "반코팅 목장갑",
+        name: "세라믹 제작",
         description:
-          "목장갑의 손바닥 쪽에 코팅을 입혀 미끄럼을 줄이고 내구성을 높인 작업용 장갑입니다.",
-        image: productImages.gloveCoated,
+          "세라믹 소재 제품을 도면과 사양에 맞춰 제작합니다. 내열성, 내마모성, 절연성이 요구되는 부품에 사용됩니다.",
       },
       {
-        name: "니트릴 장갑",
+        name: "특수 테이프",
         description:
-          "니트릴 소재의 일회용 장갑으로, 손에서 발생하는 오염과 이물을 줄이기 위해 착용합니다.",
-        image: productImages.gloveNitrile,
+          "사용 환경과 용도에 맞는 특수 테이프를 공급합니다. 소재와 접착 방식, 사용 온도 등 필요한 사양을 알려 주시면 상담해 드립니다.",
+      },
+      {
+        name: "각종 약품",
+        description:
+          "현장에서 사용하는 각종 약품을 취급합니다. 품목과 용도, 수량에 맞춰 상담해 드립니다.",
       },
     ],
     sections: [
       {
+        heading: "제작 품목 상담 시 알려 주세요",
+        items: [
+          "도면 또는 샘플, 사진 등 제작 참고 자료",
+          "소재와 요구 사양 (치수, 사용 환경 등)",
+          "수량과 희망 납기",
+        ],
+      },
+      {
         heading: "그 밖의 품목",
-        body: "위 품목 외에도 크린룸에서 사용하는 소모품을 취급합니다. 필요한 품목과 규격, 수량을 문의해 주세요.",
+        body: "위 품목 외에도 크린룸과 반도체 현장에서 필요한 제품을 상담해 드립니다. 필요한 품목과 규격, 수량을 문의해 주세요.",
       },
     ],
     related: ["semiconductor-equipment-post-processing"],
     seo: {
-      title: "크린룸 제품 - 헤어캡·마스크·클린면봉·장갑",
+      title: "크린룸 관련 제품 - 테프론·세라믹 제작, 특수 테이프, 약품",
       description:
-        "크린룸(클린룸)에서 사용하는 헤어캡, 마스크, 클린면봉, 목장갑, 반코팅 목장갑, 니트릴 장갑 등 크린룸 소모품을 취급합니다. 필요한 품목과 규격을 조은상사에 문의하세요.",
+        "마스크, 클린면봉 등 크린룸 소모품과 테프론(PTFE)·세라믹 제작, 특수 테이프, 각종 약품을 취급합니다. 필요한 품목과 사양을 조은상사에 문의하세요.",
       keywords: [
+        "크린룸 관련 제품",
         "크린룸 제품",
         "클린룸 제품",
         "크린룸 소모품",
-        "크린룸 헤어캡",
         "크린룸 마스크",
-        "크린룸 면봉",
         "클린면봉",
-        "크린룸 장갑",
-        "목장갑",
-        "반코팅 목장갑",
-        "니트릴 장갑",
+        "크린룸 면봉",
+        "테프론 제작",
+        "PTFE 제작",
+        "세라믹 제작",
+        "특수 테이프",
+        "크린룸 약품",
       ],
     },
   },
@@ -460,8 +436,8 @@ export const capabilities = [
   },
   {
     label: "Supplies",
-    title: "크린룸 물품",
-    values: ["헤어캡", "마스크", "클린면봉", "목장갑·니트릴 장갑 등"],
+    title: "크린룸 관련 제품",
+    values: ["마스크", "면봉", "테프론(PTFE)·세라믹 제작", "특수 테이프", "각종 약품"],
   },
 ] as const;
 

@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site";
 
 const title = "문의하기";
 const description =
-  "반도체 장비 후처리, 주문제작, 용접·샌딩, 크린룸 제품에 대한 문의는 조은상사로 연락해 주세요.";
+  "반도체 장비 후처리, 주문제작, 용접·샌딩, 크린룸 관련 제품에 대한 문의는 조은상사로 연락해 주세요.";
 
 export const metadata = createMetadata({
   title,
