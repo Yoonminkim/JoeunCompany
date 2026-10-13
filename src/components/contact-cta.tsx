@@ -9,7 +9,7 @@ export function ContactCta() {
   return (
     <section className="bg-brand-dark text-paper">
       <Container className="grid items-end gap-10 py-16 md:grid-cols-12">
-        <div className="md:col-span-7">
+        <div className="reveal md:col-span-7">
           <p className="label !text-accent-light">Contact</p>
           <h2 className="mt-3 text-3xl font-bold leading-[1.25] tracking-tight sm:text-4xl">
             후처리, 주문제작, 크린룸 제품
@@ -21,7 +21,7 @@ export function ContactCta() {
           </p>
         </div>
 
-        <div className="md:col-span-5 md:text-right">
+        <div className="reveal md:col-span-5 md:text-right">
           {phone && (
             <a
               href={`tel:${phone}`}

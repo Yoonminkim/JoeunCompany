@@ -37,10 +37,10 @@ export default function ContactPage() {
       <Container className="grid gap-14 py-16 lg:grid-cols-12 lg:gap-16 lg:py-20">
         <div className="lg:col-span-7">
           <SectionHeading eyebrow="Online inquiry" title="온라인 문의" />
-          <p className="mt-4 text-sm leading-6 text-ink-soft">
+          <p className="reveal mt-4 text-sm leading-6 text-ink-soft">
             아래 양식을 작성해 주시면 확인 후 입력하신 이메일로 답변드립니다.
           </p>
-          <div className="mt-8">
+          <div className="reveal mt-8">
             <ContactForm />
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function ContactPage() {
               {rows.map((row) => (
                 <div
                   key={row.label}
-                  className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-line py-5"
+                  className="reveal grid grid-cols-[5.5rem_1fr] gap-4 border-b border-line py-5"
                 >
                   <dt className="label pt-1.5">{row.label}</dt>
                   <dd>

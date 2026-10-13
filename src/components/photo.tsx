@@ -12,7 +12,7 @@ export function Photo({
   sizes?: string;
 }) {
   return (
-    <div className="overflow-hidden bg-paper-deep">
+    <div className="reveal-img overflow-hidden bg-paper-deep">
       <Image
         src={image.src}
         alt={image.alt}
