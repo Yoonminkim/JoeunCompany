@@ -28,30 +28,31 @@ export const siteConfig = {
   name: "조은상사",
   nameEn: "JoeunCompany",
   /** 검색엔진이 같은 회사로 인식하도록 알려주는 다른 이름들 */
-  alternateNames: ["JoeunCompany", "Joeun Company", "JJ"],
+  alternateNames: ["JoeunCompany", "Joeun Company"],
   url: resolveSiteUrl(),
   locale: "ko_KR",
   language: "ko",
 
   /** 기본 title (홈) */
-  title: "조은상사 | 반도체 장비 후처리 · 주문제작 · 크린룸 관련 제품",
+  title: "조은상사 | 쉴드 세정·정밀세척 · 주문제작 · 크린룸 관련 제품",
   /** 각 페이지 title 에 붙는 접미사 */
   titleTemplate: "%s | 조은상사",
   description:
-    "조은상사(JoeunCompany, JJ)는 반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접·샌딩, 크린룸 관련 제품(마스크, 면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품)을 취급합니다.",
+    "조은상사(JoeunCompany)는 반도체 장비 부품의 쉴드 세정·정밀세척, 알루미늄·SUS403 제품 주문제작, 용접·샌딩·용사코팅, 크린룸 관련 제품(마스크, 면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품)을 취급합니다.",
 
   keywords: [
     "조은상사",
     "JoeunCompany",
     "Joeun Company",
-    "JJ",
     "반도체",
-    "반도체 장비 후처리",
-    "반도체 후처리",
+    "쉴드 세정",
+    "정밀세척",
+    "반도체 장비 세정",
     "알루미늄 주문제작",
     "SUS403",
     "용접",
     "샌딩",
+    "용사코팅",
     "크린룸",
     "클린룸",
     "크린룸 제품",

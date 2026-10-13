@@ -2,7 +2,7 @@
 
 /*
  * 디자인 토큰
- * - accent : 조은상사 로고의 보라색(#492EA7). 포인트 색은 이 한 가지만 사용합니다.
+ * - accent : 조은상사 로고의 보라색(#4125B5). 포인트 색은 이 한 가지만 사용합니다.
  * - paper  : 순백 대신 쓰는 따뜻한 바탕색 (인쇄물 같은 질감)
  * - ink    : 본문/제목 색. 보라 기운이 도는 짙은 색
  */
@@ -12,10 +12,10 @@
   --ink: #1b1730;
   --ink-soft: #5b5670;
   --line: #dad6d0;
-  --accent: #492ea7;
-  --accent-deep: #36207f;
+  --accent: #4125b5;
+  --accent-deep: #2f1b82;
   --accent-light: #c4b5fd;
-  --brand-dark: #271560;
+  --brand-dark: #241464;
 }
 
 @theme inline {

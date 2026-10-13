@@ -162,7 +162,7 @@ export function ContactForm() {
           rows={7}
           minLength={inquiryLimits.messageMin}
           maxLength={inquiryLimits.message}
-          placeholder="필요한 제품(규격·수량) 또는 후처리 요청 사항을 적어 주세요."
+          placeholder="필요한 제품(규격·수량) 또는 세정·제작 요청 사항을 적어 주세요."
           defaultValue={values.message}
           className={inputClass}
           {...errorProps("message")}
@@ -203,7 +203,7 @@ export function ContactForm() {
             name="consent"
             required
             defaultChecked={values.consent === "on"}
-            className="mt-0.5 size-4 shrink-0 rounded-none border-ink/40 accent-[#492ea7]"
+            className="mt-0.5 size-4 shrink-0 rounded-none border-ink/40 accent-[#4125b5]"
             {...errorProps("consent")}
           />
           <span>
