@@ -16,8 +16,8 @@ export function Logo({
     <Image
       src="/brand/logo.png"
       alt="조은상사 JJ"
-      width={1157}
-      height={208}
+      width={1646}
+      height={320}
       priority={priority}
       className={className}
     />

@@ -203,7 +203,7 @@ export function ContactForm() {
             name="consent"
             required
             defaultChecked={values.consent === "on"}
-            className="mt-0.5 size-4 shrink-0 rounded-none border-ink/40 accent-[#492ea7]"
+            className="mt-0.5 size-4 shrink-0 rounded-none border-ink/40 accent-[#4125b5]"
             {...errorProps("consent")}
           />
           <span>

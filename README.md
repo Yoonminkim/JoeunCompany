@@ -22,7 +22,7 @@ npm run start   # 빌드 결과 실행
 | `src/app/{about,contact}` | 회사소개, 문의하기 |
 | `src/app/contact/actions.ts`, `src/components/contact-form.tsx` | 문의 폼 (서버 액션 + 서버 측 검증 + 스팸 방지 허니팟) |
 | `src/lib/contact.ts`, `src/lib/mail.ts` | 문의 항목/검증 규칙, 메일 발송 (Resend) |
-| `public/brand/logo-original.png` | 조은상사 공식 로고 원본 (투명 배경, 브랜드 색 `#492EA7`) |
+| `public/brand/logo-original.png` | 조은상사 공식 로고 원본 (투명 배경, 브랜드 색 `#4125B5`) |
 | `public/brand/logo.png`, `logo-mark.png` | 원본에서 여백을 제거한 가로형 로고 / JJ 모노그램. 헤더·푸터에서 사용 |
 | `public/logo.png`, `public/og-image.png`, `src/app/{favicon.ico,apple-icon.png}` | 로고에서 파생한 구조화 데이터용 로고, 공유(OG) 이미지, 아이콘 |
 
