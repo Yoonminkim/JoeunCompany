@@ -87,7 +87,7 @@ export default function HomePage() {
 
       <section className="pt-16">
         <Container>
-          <Photo image={images.corridor} />
+          <Photo image={images.homeBanner} priority />
         </Container>
       </section>
 

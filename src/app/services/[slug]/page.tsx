@@ -90,11 +90,7 @@ export default async function ServiceDetailPage({
           {service.products && service.products.length > 0 && (
             <section>
               <SectionHeading eyebrow={nextEyebrow("Items")} title="취급 품목" />
-              <p className="mt-4 text-sm leading-6 text-ink-soft">
-                사진은 이해를 돕기 위한 예시 이미지이며, 실제 제품과 색상·형태가
-                다를 수 있습니다. 규격과 사양은 문의해 주세요.
-              </p>
-              <ul className="mt-4 border-t border-line">
+              <ul className="mt-6 border-t border-line">
                 {service.products.map((product) => (
                   <li
                     key={product.name}
@@ -116,13 +112,6 @@ export default async function ServiceDetailPage({
                       <p className="mt-2 leading-7 text-ink-soft">
                         {product.description}
                       </p>
-                      {product.image && (
-                        <p className="label mt-3 !text-[10px]">
-                          {product.image.approximate
-                            ? "Similar example · 유사 예시 이미지"
-                            : "Example image · 예시 이미지"}
-                        </p>
-                      )}
                     </div>
                   </li>
                 ))}
