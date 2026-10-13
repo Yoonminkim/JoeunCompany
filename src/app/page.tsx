@@ -27,7 +27,7 @@ export default function HomePage() {
         <Container className="grid gap-14 pb-16 pt-14 lg:grid-cols-12 lg:gap-10 lg:pb-24 lg:pt-20">
           <div className="lg:col-span-7">
             <p className="label hero-in" style={heroDelay(0)}>
-              Joeun Company · JJ
+              Joeun Company
             </p>
             <h1
               className="hero-in mt-6 text-[2.5rem] font-bold leading-[1.15] tracking-tight sm:text-6xl"
@@ -36,7 +36,7 @@ export default function HomePage() {
               <span className="mb-4 block text-xl font-semibold tracking-normal text-accent sm:text-2xl">
                 {siteConfig.name}
               </span>
-              반도체 장비 후처리,
+              쉴드 세정·정밀세척,
               <br />
               금속 주문제작,
               <br />
@@ -46,7 +46,7 @@ export default function HomePage() {
               className="hero-in mt-8 max-w-xl text-lg leading-8 text-ink-soft"
               style={heroDelay(2)}
             >
-              알루미늄·SUS403 제품 주문제작과 용접·샌딩, 반도체 장비 후처리,
+              반도체 장비 부품의 쉴드 세정·정밀세척, 알루미늄·SUS403 제품 주문제작과 용접·샌딩·용사코팅,
               그리고 마스크·면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품 등 크린룸 관련 제품을 취급합니다.
             </p>
             <div

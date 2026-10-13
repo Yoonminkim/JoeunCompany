@@ -23,7 +23,7 @@ npm run start   # 빌드 결과 실행
 | `src/app/contact/actions.ts`, `src/components/contact-form.tsx` | 문의 폼 (서버 액션 + 서버 측 검증 + 스팸 방지 허니팟) |
 | `src/lib/contact.ts`, `src/lib/mail.ts` | 문의 항목/검증 규칙, 메일 발송 (Resend) |
 | `public/brand/logo-original.png` | 조은상사 공식 로고 원본 (투명 배경, 브랜드 색 `#4125B5`) |
-| `public/brand/logo.png`, `logo-mark.png` | 원본에서 여백을 제거한 가로형 로고 / JJ 모노그램. 헤더·푸터에서 사용 |
+| `public/brand/logo.png`, `logo-mark.png` | 원본에서 여백을 제거한 가로형 로고 / 모노그램. 헤더·푸터에서 사용 |
 | `public/logo.png`, `public/og-image.png`, `src/app/{favicon.ico,apple-icon.png}` | 로고에서 파생한 구조화 데이터용 로고, 공유(OG) 이미지, 아이콘 |
 
 디자인 토큰(색상·폰트)은 `src/app/globals.css` 에서 관리합니다. 포인트 색은 로고의 보라색 한 가지만 사용합니다.
@@ -68,11 +68,12 @@ seo: {
 
 | 파일 | 용도 | 출처 | 라이선스 |
 | --- | --- | --- | --- |
-| `cleanroom-fab.jpg` | 반도체 장비 후처리 | [NASA Glenn Research Center / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Clean_room.jpg) | Public domain |
+| `cleanroom-fab.jpg` | 쉴드 세정·정밀세척 | [NASA Glenn Research Center / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Clean_room.jpg) | Public domain |
 | `home-banner.jpg` | 홈 메인 배너 (2400×1050) | [Mufid Majnun / Pexels](https://www.pexels.com/photo/man-wearing-uniform-in-a-lab-9485592/) | Pexels License |
 | `fabrication-cutting.jpg` | 제품 주문제작 | [Ana Victoria Valverde / Pexels](https://www.pexels.com/photo/plasma-cutting-in-factory-17180807/) | Pexels License |
 | `welding.jpg` | 용접 | [Valentin Saumon / Pexels](https://www.pexels.com/photo/a-person-wearing-a-protective-head-shield-welding-metals-9130186/) | Pexels License |
 | `sanding-grinder.jpg` | 샌딩 | [Guduru Ajay bhargav / Pexels](https://www.pexels.com/photo/person-using-green-and-grey-angle-grinder-on-sheet-of-metal-977526/) | Pexels License |
+| `thermal-spray.jpg` | 용사코팅 (2400×1050) | [NASA/Marvin G. Smith / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Plasma_Spray-Physical_Vapor_Deposition.jpg) | Public domain (NASA) |
 | `cleanroom-supplies.jpg` | 크린룸 관련 제품 | [Polina Tankilevitch / Pexels](https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/) | Pexels License |
 
 취급 품목(크린룸 관련 제품)의 이미지는 `public/images/products/` 에 있습니다. (800×600, 4:3)

@@ -162,7 +162,7 @@ export function ContactForm() {
           rows={7}
           minLength={inquiryLimits.messageMin}
           maxLength={inquiryLimits.message}
-          placeholder="필요한 제품(규격·수량) 또는 후처리 요청 사항을 적어 주세요."
+          placeholder="필요한 제품(규격·수량) 또는 세정·제작 요청 사항을 적어 주세요."
           defaultValue={values.message}
           className={inputClass}
           {...errorProps("message")}

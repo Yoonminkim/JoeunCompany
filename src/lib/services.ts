@@ -16,12 +16,12 @@ export const serviceCategories: Record<
   { label: string; description: string }
 > = {
   semiconductor: {
-    label: "반도체 장비 후처리",
-    description: "반도체 장비 제품의 가공 이후 마감과 후처리 작업",
+    label: "쉴드 세정·정밀세척",
+    description: "반도체 장비 부품의 쉴드 세정과 정밀세척",
   },
   fabrication: {
     label: "금속 제작·가공",
-    description: "알루미늄·SUS403 제품 주문제작과 용접, 샌딩 작업",
+    description: "알루미늄·SUS403 제품 주문제작과 용접, 샌딩, 용사코팅 작업",
   },
   cleanroom: {
     label: "크린룸 관련 제품",
@@ -159,6 +159,15 @@ export const images = {
     "https://www.pexels.com/photo/person-using-green-and-grey-angle-grinder-on-sheet-of-metal-977526/",
     "Pexels License",
   ),
+  /** 용사코팅 (NASA 플라즈마 용사 공정 사진, 2400×1050) */
+  thermalSpray: stockPhoto(
+    "thermal-spray",
+    "플라즈마 용사 코팅 공정",
+    "NASA/Marvin G. Smith (via Wikimedia Commons)",
+    "https://commons.wikimedia.org/wiki/File:Plasma_Spray-Physical_Vapor_Deposition.jpg",
+    "Public domain (NASA)",
+    { width: 2400, height: 1050 },
+  ),
   supplies: stockPhoto(
     "cleanroom-supplies",
     "마스크 등 크린룸 소모품",
@@ -237,36 +246,53 @@ const productImages = {
 
 export const services: Service[] = [
   {
-    slug: "semiconductor-equipment-post-processing",
+    slug: "shield-precision-cleaning",
     category: "semiconductor",
     image: images.cleanroomFab,
-    name: "반도체 장비 후처리",
-    subtitle: "반도체 장비 제품의 가공 이후 마감과 표면 정리",
+    name: "쉴드 세정·정밀세척",
+    subtitle: "반도체 장비 부품의 쉴드 세정과 정밀세척",
     summary:
-      "반도체 장비에 사용되는 제품의 가공·용접 이후 마감과 표면 정리 등 후처리 작업을 요구 사양에 맞춰 진행합니다.",
+      "반도체 장비에 사용되는 쉴드(Shield) 등의 부품에 쌓인 증착물과 오염물을 제거하는 쉴드 세정과, 크린룸 환경에 맞춘 정밀세척을 진행합니다.",
     intro: [
-      "반도체 장비에 들어가는 제품은 가공과 용접을 마친 뒤에도 표면 상태와 마감 상태를 정리하는 후속 작업이 필요한 경우가 많습니다. 조은상사는 반도체 장비 후처리 작업을 요구 사양에 맞춰 진행합니다.",
-      "크린룸 환경에서 사용되는 제품일수록 작업 이후의 마감 상태가 중요합니다. 제품의 소재와 형상, 사용 환경을 확인한 뒤 필요한 후처리 범위를 상담해 드립니다.",
+      "반도체 장비의 챔버 안에서 사용되는 쉴드(Shield) 같은 부품에는 공정을 거치며 증착물과 오염물이 쌓입니다. 이를 제거해 부품을 다시 사용할 수 있는 상태로 만드는 작업이 쉴드 세정입니다.",
+      "조은상사는 반도체 장비 부품의 쉴드 세정과 정밀세척을 진행합니다. 미세한 오염과 입자가 문제가 되는 크린룸 환경에 맞춰, 부품의 소재와 형상, 오염 상태를 확인한 뒤 적합한 세정 방식을 상담해 드립니다.",
     ],
     sections: [
       {
         heading: "이런 경우 문의해 주세요",
         items: [
-          "가공·용접을 마친 반도체 장비 제품의 후속 마감 작업이 필요한 경우",
-          "알루미늄·SUS 소재 제품의 표면 정리가 필요한 경우",
-          "제작부터 용접, 샌딩, 후처리까지 한 곳에서 상담받고 싶은 경우",
+          "사용한 쉴드 등 장비 부품의 증착물·오염물 제거가 필요한 경우",
+          "크린룸 환경에 맞춰 미세 오염과 입자를 정밀하게 세척해야 하는 경우",
+          "세정 이후 필요한 표면 작업(샌딩, 용사코팅 등)까지 함께 상담받고 싶은 경우",
+        ],
+      },
+      {
+        heading: "상담 시 알려 주세요",
+        items: [
+          "세정 대상 부품의 종류와 소재, 크기 (사진 또는 도면)",
+          "오염 상태 (증착물의 종류, 사용 이력 등)",
+          "요구하는 청정도 기준과 포장·납품 조건",
+          "수량과 희망 납기",
         ],
       },
     ],
-    related: ["custom-metal-fabrication", "welding", "sanding"],
+    related: [
+      "custom-metal-fabrication",
+      "welding",
+      "sanding",
+      "thermal-spray-coating",
+    ],
     seo: {
-      title: "반도체 장비 후처리",
+      title: "쉴드 세정·정밀세척",
       description:
-        "조은상사의 반도체 장비 후처리 안내. 반도체 장비 제품의 가공·용접 이후 마감과 표면 정리 등 후처리 작업을 요구 사양에 맞춰 상담해 드립니다.",
+        "반도체 장비 부품의 쉴드 세정과 정밀세척을 크린룸 환경에 맞춰 상담해 드립니다. 증착물과 오염물 제거가 필요하다면 조은상사에 문의하세요.",
       keywords: [
-        "반도체 장비 후처리",
-        "반도체 후처리",
-        "반도체 장비",
+        "쉴드 세정",
+        "쉴드세정",
+        "정밀세척",
+        "정밀 세정",
+        "반도체 장비 세정",
+        "반도체 부품 세정",
         "반도체",
         "조은상사",
       ],
@@ -281,7 +307,7 @@ export const services: Service[] = [
     summary:
       "알루미늄과 SUS403 소재로 고객이 요구하는 도면과 사양에 맞춰 제품을 주문제작합니다.",
     intro: [
-      "조은상사는 알루미늄과 SUS403 소재를 사용해 고객의 도면과 사양에 맞는 제품을 주문제작합니다. 용도와 수량에 맞춰 제작 방식을 상담해 드리며, 용접과 샌딩, 후처리까지 이어서 문의하실 수 있습니다.",
+      "조은상사는 알루미늄과 SUS403 소재를 사용해 고객의 도면과 사양에 맞는 제품을 주문제작합니다. 용도와 수량에 맞춰 제작 방식을 상담해 드리며, 용접과 샌딩, 용사코팅, 세정까지 이어서 문의하실 수 있습니다.",
       "알루미늄은 가볍고 가공이 쉬운 소재이고, 스테인리스강(SUS)은 강도와 내식성이 요구되는 제품에 사용됩니다. 제품의 사용 환경에 맞는 소재를 선택할 수 있도록 상담해 드립니다.",
     ],
     sections: [
@@ -299,7 +325,12 @@ export const services: Service[] = [
         ],
       },
     ],
-    related: ["welding", "sanding", "semiconductor-equipment-post-processing"],
+    related: [
+      "welding",
+      "sanding",
+      "thermal-spray-coating",
+      "shield-precision-cleaning",
+    ],
     seo: {
       title: "알루미늄·SUS403 제품 주문제작",
       description:
@@ -336,7 +367,12 @@ export const services: Service[] = [
         ],
       },
     ],
-    related: ["sanding", "custom-metal-fabrication", "semiconductor-equipment-post-processing"],
+    related: [
+      "sanding",
+      "thermal-spray-coating",
+      "custom-metal-fabrication",
+      "shield-precision-cleaning",
+    ],
     seo: {
       title: "금속 용접",
       description:
@@ -365,12 +401,67 @@ export const services: Service[] = [
         ],
       },
     ],
-    related: ["welding", "custom-metal-fabrication", "semiconductor-equipment-post-processing"],
+    related: [
+      "welding",
+      "thermal-spray-coating",
+      "custom-metal-fabrication",
+      "shield-precision-cleaning",
+    ],
     seo: {
       title: "샌딩 작업",
       description:
         "용접과 가공 이후의 표면을 고르게 정리하는 샌딩 작업을 진행합니다. 제품의 소재와 용도에 맞춰 조은상사에 상담하세요.",
       keywords: ["샌딩", "샌딩 작업", "금속 샌딩", "표면 마감", "용접 후 샌딩"],
+    },
+  },
+  {
+    slug: "thermal-spray-coating",
+    category: "fabrication",
+    image: images.thermalSpray,
+    name: "용사코팅",
+    subtitle: "표면에 기능성 코팅층을 입히는 용사코팅",
+    summary:
+      "제품 표면에 재료를 분사해 내마모·내식·내열 등의 기능을 더하는 용사코팅을 소재와 사용 목적에 맞춰 상담해 드립니다.",
+    intro: [
+      "용사코팅은 금속이나 세라믹 등의 재료를 녹이거나 가열해 제품 표면에 분사하고, 그 입자가 쌓여 코팅층을 이루게 하는 표면 처리 방식입니다. 제품 표면에 내마모성, 내식성, 내열성, 절연성 같은 기능을 더하거나 마모된 부분을 복원하는 데 사용됩니다.",
+      "조은상사는 제작과 용접, 샌딩 이후의 표면 요구 사항에 맞춰 용사코팅을 상담해 드립니다. 제품의 소재와 형상, 사용 환경을 알려 주시면 적합한 방식을 안내합니다.",
+    ],
+    sections: [
+      {
+        heading: "이런 경우 문의해 주세요",
+        items: [
+          "내마모성, 내식성, 내열성 등 표면 기능을 더하고 싶은 경우",
+          "마모되거나 손상된 부품의 표면을 복원하고 싶은 경우",
+          "제작과 용접, 샌딩, 코팅까지 한 곳에서 상담받고 싶은 경우",
+        ],
+      },
+      {
+        heading: "상담 시 알려 주세요",
+        items: [
+          "제품의 소재와 크기, 형상 (도면 또는 사진)",
+          "코팅 목적과 사용 환경 (온도, 마찰, 부식 환경 등)",
+          "수량과 희망 납기",
+        ],
+      },
+    ],
+    related: [
+      "custom-metal-fabrication",
+      "welding",
+      "sanding",
+      "shield-precision-cleaning",
+    ],
+    seo: {
+      title: "용사코팅",
+      description:
+        "금속 제품 표면에 내마모·내식·내열 기능을 더하는 용사코팅을 소재와 사용 목적에 맞춰 상담해 드립니다. 주문제작·용접·샌딩과 함께 조은상사에 문의하세요.",
+      keywords: [
+        "용사코팅",
+        "용사 코팅",
+        "금속 표면 코팅",
+        "내마모 코팅",
+        "내열 코팅",
+        "조은상사",
+      ],
     },
   },
   {
@@ -437,7 +528,7 @@ export const services: Service[] = [
         body: "위 품목 외에도 크린룸과 반도체 현장에서 필요한 제품을 상담해 드립니다. 필요한 품목과 규격, 수량을 문의해 주세요.",
       },
     ],
-    related: ["semiconductor-equipment-post-processing"],
+    related: ["shield-precision-cleaning"],
     seo: {
       title: "크린룸 관련 제품 - 테프론·세라믹 제작, 특수 테이프, 약품",
       description:
@@ -466,7 +557,7 @@ export const capabilities = [
   {
     label: "Process",
     title: "공정",
-    values: ["주문제작", "용접", "샌딩", "장비 후처리"],
+    values: ["쉴드 세정", "정밀세척", "주문제작", "용접", "샌딩", "용사코팅"],
   },
   {
     label: "Supplies",

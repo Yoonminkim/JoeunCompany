@@ -12,7 +12,7 @@ export function ContactCta() {
         <div className="reveal md:col-span-7">
           <p className="label !text-accent-light">Contact</p>
           <h2 className="mt-3 text-3xl font-bold leading-[1.25] tracking-tight sm:text-4xl">
-            후처리, 주문제작, 크린룸 관련 제품
+            세정, 주문제작, 크린룸 관련 제품
             <br />
             상담이 필요하신가요?
           </h2>
