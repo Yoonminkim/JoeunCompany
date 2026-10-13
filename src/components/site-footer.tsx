@@ -24,7 +24,7 @@ export function SiteFooter() {
         <div className="md:col-span-5">
           <Logo className="h-9 w-auto" />
           <p className="mt-6 max-w-sm text-sm leading-7 text-ink-soft">
-            반도체 장비 후처리, 금속 주문제작, 크린룸 제품을 취급합니다.
+            반도체 장비 후처리, 금속 주문제작, 크린룸 관련 제품을 취급합니다.
           </p>
         </div>
 

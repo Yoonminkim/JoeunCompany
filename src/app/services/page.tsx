@@ -8,7 +8,7 @@ import { getServicesByCategory } from "@/lib/services";
 
 const title = "제품·서비스";
 const description =
-  "반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접, 샌딩, 크린룸 제품(헤어캡·마스크·면봉·장갑 등)을 취급합니다.";
+  "반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접, 샌딩, 크린룸 관련 제품(마스크, 면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품)을 취급합니다.";
 
 export const metadata = createMetadata({
   title,
@@ -20,7 +20,10 @@ export const metadata = createMetadata({
     "SUS403",
     "용접",
     "샌딩",
-    "크린룸 제품",
+    "크린룸 관련 제품",
+    "테프론 제작",
+    "세라믹 제작",
+    "특수 테이프",
     "조은상사",
   ],
 });

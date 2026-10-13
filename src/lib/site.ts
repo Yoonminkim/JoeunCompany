@@ -34,11 +34,11 @@ export const siteConfig = {
   language: "ko",
 
   /** 기본 title (홈) */
-  title: "조은상사 | 반도체 장비 후처리 · 주문제작 · 크린룸 제품",
+  title: "조은상사 | 반도체 장비 후처리 · 주문제작 · 크린룸 관련 제품",
   /** 각 페이지 title 에 붙는 접미사 */
   titleTemplate: "%s | 조은상사",
   description:
-    "조은상사(JoeunCompany, JJ)는 반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접·샌딩, 크린룸 제품(헤어캡·마스크·면봉·장갑 등)을 취급합니다.",
+    "조은상사(JoeunCompany, JJ)는 반도체 장비 후처리, 알루미늄·SUS403 제품 주문제작, 용접·샌딩, 크린룸 관련 제품(마스크, 면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품)을 취급합니다.",
 
   keywords: [
     "조은상사",
@@ -56,6 +56,10 @@ export const siteConfig = {
     "클린룸",
     "크린룸 제품",
     "크린룸 관련 제품",
+    "테프론 제작",
+    "PTFE",
+    "세라믹 제작",
+    "특수 테이프",
   ],
 
   /** 콘텐츠를 실제로 수정한 날짜. sitemap 의 lastModified 에 사용 (빌드 시각이 아니라 실제 변경일을 쓰는 게 SEO 상 정확) */
@@ -66,12 +70,12 @@ export const siteConfig = {
     phone: "02-478-3514",
     fax: "02-478-3525",
     email: "joeunill1@naver.com",
-    address: "서울특별시 송파구 올림픽로51길 32, B1",
+    address: "서울특별시 송파구 올림픽로51길 32",
     /** 구조화 데이터(PostalAddress)용 주소 구성요소 */
     addressParts: {
       region: "서울특별시",
       locality: "송파구",
-      street: "올림픽로51길 32, B1",
+      street: "올림픽로51길 32",
     },
   } as {
     phone: string;

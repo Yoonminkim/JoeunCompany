@@ -40,14 +40,14 @@ export default function HomePage() {
               <br />
               금속 주문제작,
               <br />
-              크린룸 제품.
+              크린룸 관련 제품.
             </h1>
             <p
               className="hero-in mt-8 max-w-xl text-lg leading-8 text-ink-soft"
               style={heroDelay(2)}
             >
               알루미늄·SUS403 제품 주문제작과 용접·샌딩, 반도체 장비 후처리,
-              그리고 헤어캡·마스크·면봉·장갑 등 크린룸 제품을 취급합니다.
+              그리고 마스크·면봉, 테프론·세라믹 제작, 특수 테이프, 각종 약품 등 크린룸 관련 제품을 취급합니다.
             </p>
             <div
               className="hero-in mt-10 flex flex-wrap gap-3"

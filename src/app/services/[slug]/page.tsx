@@ -91,13 +91,13 @@ export default async function ServiceDetailPage({
             <section>
               <SectionHeading eyebrow={nextEyebrow("Items")} title="취급 품목" />
               <ul className="mt-6 border-t border-line">
-                {service.products.map((product) => (
+                {service.products.map((product, index) => (
                   <li
                     key={product.name}
                     className="reveal grid grid-cols-[7rem_minmax(0,1fr)] gap-5 border-b border-line py-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
-                      {product.image && (
+                      {product.image ? (
                         <Image
                           src={product.image.src}
                           alt={product.image.alt}
@@ -105,6 +105,14 @@ export default async function ServiceDetailPage({
                           sizes="(min-width: 640px) 160px, 112px"
                           className="object-cover"
                         />
+                      ) : (
+                        /* 이미지가 아직 없는 품목은 번호 타일로 표시합니다. */
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-medium text-ink-soft/50"
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
                       )}
                     </div>
                     <div>

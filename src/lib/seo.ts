@@ -6,7 +6,7 @@ export const ogImage = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: `${siteConfig.name} - 반도체 장비 후처리 · 주문제작 · 크린룸 제품`,
+  alt: `${siteConfig.name} - 반도체 장비 후처리 · 주문제작 · 크린룸 관련 제품`,
 };
 
 type PageSeo = {

@@ -73,20 +73,17 @@ seo: {
 | `fabrication-cutting.jpg` | 제품 주문제작 | [Ana Victoria Valverde / Pexels](https://www.pexels.com/photo/plasma-cutting-in-factory-17180807/) | Pexels License |
 | `welding.jpg` | 용접 | [Valentin Saumon / Pexels](https://www.pexels.com/photo/a-person-wearing-a-protective-head-shield-welding-metals-9130186/) | Pexels License |
 | `sanding-grinder.jpg` | 샌딩 | [Guduru Ajay bhargav / Pexels](https://www.pexels.com/photo/person-using-green-and-grey-angle-grinder-on-sheet-of-metal-977526/) | Pexels License |
-| `cleanroom-supplies.jpg` | 크린룸 제품 | [Polina Tankilevitch / Pexels](https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/) | Pexels License |
+| `cleanroom-supplies.jpg` | 크린룸 관련 제품 | [Polina Tankilevitch / Pexels](https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/) | Pexels License |
 
-취급 품목(크린룸 제품)의 이미지는 `public/images/products/` 에 있습니다. (800×600, 4:3)
+취급 품목(크린룸 관련 제품)의 이미지는 `public/images/products/` 에 있습니다. (800×600, 4:3)
 
 | 파일 | 품목 | 출처 | 라이선스 |
 | --- | --- | --- | --- |
-| `haircap.jpg` | 헤어캡 (청록색 제품, 실제와 다름) | [kaboompics.com / Pexels](https://www.pexels.com/photo/person-holding-a-bouffant-cap-8538701/) | Pexels License |
 | `mask-white.jpg` | 마스크 | [Media Studio Hong Kong / Pexels](https://www.pexels.com/photo/a-white-face-mask-on-a-white-surface-8264728/) | Pexels License |
 | `swab-clean.jpg` | 클린면봉 (일반 면봉, 실제와 다름) | [Daniel Dan / Pexels](https://www.pexels.com/photo/close-up-shot-of-cotton-buds-7612836/) | Pexels License |
-| `glove-cotton.jpg` | 목장갑 (코팅 장갑 사진, 실제와 다름) | [gadaji66 / Pixabay](https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/) | Pixabay Content License |
-| `glove-coated.jpg` | 반코팅 목장갑 | [gadaji66 / Pixabay](https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/) | Pixabay Content License |
-| `glove-nitrile.jpg` | 니트릴 장갑 | [Callum Hilton / Pexels](https://www.pexels.com/photo/a-pair-of-blue-latex-gloves-7856715/) | Pexels License |
 
 "실제와 다름"으로 표시한 이미지는 실제 취급 제품과 색상·형태가 다른 스톡 사진입니다. (화면에는 표시되지 않음)
+테프론(PTFE) 제작, 세라믹 제작, 특수 테이프, 각종 약품은 아직 이미지가 없어 번호 타일로 표시됩니다. 이미지를 추가하려면 `src/lib/services.ts` 의 `productImages` 에 항목을 만들고 해당 품목의 `image` 에 연결하세요.
 실제 제품 사진이 생기면 같은 파일명으로 교체하고 `src/lib/services.ts` 의 `approximate` 값을 제거하세요.
 
 실제 작업 사진으로 교체할 때는 같은 비율(1600×700, 21:9)의 이미지를 `public/images/` 에 넣고
