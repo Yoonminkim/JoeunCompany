@@ -40,10 +40,10 @@ export default function ServicesPage() {
               eyebrow={`Category ${String(index + 1).padStart(2, "0")}`}
               title={group.label}
             />
-            <p className="mt-3 text-ink-soft">{group.description}</p>
+            <p className="reveal mt-3 text-ink-soft">{group.description}</p>
             <ul className="mt-6 border-t border-line">
               {group.services.map((service) => (
-                <li key={service.slug}>
+                <li key={service.slug} className="reveal">
                   <ServiceRow service={service} />
                 </li>
               ))}

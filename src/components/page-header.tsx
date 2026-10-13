@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "./container";
 import { JsonLd } from "./json-ld";
+import { heroDelay } from "@/lib/motion";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -28,7 +29,11 @@ export function PageHeader({
     <section className="border-b border-line">
       <JsonLd data={breadcrumbJsonLd(trail)} />
       <Container className="pb-12 pt-8 sm:pb-16">
-        <nav aria-label="현재 위치" className="text-sm text-ink-soft">
+        <nav
+          aria-label="현재 위치"
+          className="hero-in text-sm text-ink-soft"
+          style={heroDelay(0)}
+        >
           <ol className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
             <li>
               <Link href="/" className="hover:text-accent">
@@ -53,17 +58,24 @@ export function PageHeader({
         </nav>
 
         {eyebrow && (
-          <p className="mt-12 flex items-center gap-3 text-sm font-semibold text-accent">
+          <p
+            className="hero-in mt-12 flex items-center gap-3 text-sm font-semibold text-accent"
+            style={heroDelay(1)}
+          >
             <span aria-hidden="true" className="h-0.5 w-8 bg-accent" />
             {eyebrow}
           </p>
         )}
         <h1
-          className={`${eyebrow ? "mt-4" : "mt-12"} max-w-4xl text-4xl font-bold leading-[1.2] tracking-tight sm:text-5xl`}
+          className={`hero-in ${eyebrow ? "mt-4" : "mt-12"} max-w-4xl text-4xl font-bold leading-[1.2] tracking-tight sm:text-5xl`}
+          style={heroDelay(2)}
         >
           {title}
         </h1>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-soft">
+        <p
+          className="hero-in mt-5 max-w-2xl text-lg leading-8 text-ink-soft"
+          style={heroDelay(3)}
+        >
           {description}
         </p>
       </Container>

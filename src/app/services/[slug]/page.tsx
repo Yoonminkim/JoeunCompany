@@ -80,7 +80,7 @@ export default async function ServiceDetailPage({
               eyebrow={nextEyebrow("Overview")}
               title={`${service.name} 안내`}
             />
-            <div className="mt-6 space-y-5 text-[17px] leading-9">
+            <div className="reveal mt-6 space-y-5 text-[17px] leading-9">
               {service.intro.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -90,15 +90,11 @@ export default async function ServiceDetailPage({
           {service.products && service.products.length > 0 && (
             <section>
               <SectionHeading eyebrow={nextEyebrow("Items")} title="취급 품목" />
-              <p className="mt-4 text-sm leading-6 text-ink-soft">
-                사진은 이해를 돕기 위한 예시 이미지이며, 실제 제품과 색상·형태가
-                다를 수 있습니다. 규격과 사양은 문의해 주세요.
-              </p>
-              <ul className="mt-4 border-t border-line">
+              <ul className="mt-6 border-t border-line">
                 {service.products.map((product) => (
                   <li
                     key={product.name}
-                    className="grid grid-cols-[7rem_minmax(0,1fr)] gap-5 border-b border-line py-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8"
+                    className="reveal grid grid-cols-[7rem_minmax(0,1fr)] gap-5 border-b border-line py-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
                       {product.image && (
@@ -116,13 +112,6 @@ export default async function ServiceDetailPage({
                       <p className="mt-2 leading-7 text-ink-soft">
                         {product.description}
                       </p>
-                      {product.image && (
-                        <p className="label mt-3 !text-[10px]">
-                          {product.image.approximate
-                            ? "Similar example · 유사 예시 이미지"
-                            : "Example image · 예시 이미지"}
-                        </p>
-                      )}
                     </div>
                   </li>
                 ))}
@@ -137,14 +126,16 @@ export default async function ServiceDetailPage({
                 title={section.heading}
               />
               {section.body && (
-                <p className="mt-6 text-[17px] leading-9">{section.body}</p>
+                <p className="reveal mt-6 text-[17px] leading-9">
+                  {section.body}
+                </p>
               )}
               {section.items && (
                 <ul className="mt-5 border-t border-line">
                   {section.items.map((item) => (
                     <li
                       key={item}
-                      className="flex gap-4 border-b border-line py-4 leading-7"
+                      className="reveal flex gap-4 border-b border-line py-4 leading-7"
                     >
                       <span
                         aria-hidden="true"
@@ -166,7 +157,7 @@ export default async function ServiceDetailPage({
               />
               <ol className="mt-6 grid gap-px bg-line sm:grid-cols-2">
                 {processSteps.map((step, index) => (
-                  <li key={step.title} className="bg-paper p-6">
+                  <li key={step.title} className="reveal bg-paper p-6">
                     <span className="font-mono text-sm font-medium text-accent">
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -183,7 +174,7 @@ export default async function ServiceDetailPage({
 
         <aside className="lg:col-span-4">
           <div className="space-y-10 lg:sticky lg:top-28">
-            <div className="border-t-2 border-accent bg-paper-deep p-6">
+            <div className="reveal border-t-2 border-accent bg-paper-deep p-6">
               <p className="label">Inquiry</p>
               <p className="mt-2 font-semibold">{service.name} 문의</p>
               {phone && (
@@ -204,7 +195,7 @@ export default async function ServiceDetailPage({
             </div>
 
             {related.length > 0 && (
-              <nav aria-label="함께 보면 좋은 제품·서비스">
+              <nav aria-label="함께 보면 좋은 제품·서비스" className="reveal">
                 <p className="label">Related</p>
                 <h2 className="mt-1 text-lg font-bold">함께 보면 좋은 항목</h2>
                 <ul className="mt-4 border-t border-ink">

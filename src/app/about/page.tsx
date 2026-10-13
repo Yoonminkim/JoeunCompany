@@ -36,7 +36,7 @@ export default function AboutPage() {
         <div className="lg:col-span-5">
           <SectionHeading eyebrow="About" title={`${siteConfig.name}을 소개합니다`} />
         </div>
-        <p className="text-[17px] leading-9 lg:col-span-7 lg:pt-6">
+        <p className="reveal text-[17px] leading-9 lg:col-span-7 lg:pt-6">
           {siteConfig.name}({siteConfig.nameEn})은 반도체 장비 후처리와
           알루미늄·SUS403 제품 주문제작, 용접, 샌딩, 그리고 크린룸 제품을
           취급하는 기업입니다. 청정도와 마감 상태가 중요한 반도체 산업
@@ -51,7 +51,7 @@ export default function AboutPage() {
             {overview.map((row) => (
               <div
                 key={row.label}
-                className="grid gap-1 border-b border-line py-5 sm:grid-cols-[10rem_1fr] sm:gap-8"
+                className="reveal grid gap-1 border-b border-line py-5 sm:grid-cols-[10rem_1fr] sm:gap-8"
               >
                 <dt className="text-sm font-semibold text-ink-soft">
                   {row.label}

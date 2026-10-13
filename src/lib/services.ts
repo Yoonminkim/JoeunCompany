@@ -38,7 +38,7 @@ export type ServiceSection = {
 export type ServiceImage = {
   /** public 기준 경로 */
   src: string;
-  /** 대체 텍스트. 참고용 이미지라는 점이 드러나게 작성합니다. */
+  /** 대체 텍스트 (이미지 내용을 설명) */
   alt: string;
   width: number;
   height: number;
@@ -46,7 +46,7 @@ export type ServiceImage = {
   credit: string;
   source: string;
   license: string;
-  /** 실제 취급 제품과 형태/색상이 다른 유사 이미지이면 true (화면에 "유사 예시"로 표시) */
+  /** 실제 취급 제품과 형태/색상이 다른 스톡 이미지이면 true. 화면에는 표시하지 않으며, 실제 사진으로 교체할 대상을 추적하는 용도입니다. */
   approximate?: boolean;
 };
 
@@ -65,7 +65,7 @@ export type Service = {
   /** 본문 소개 단락 */
   intro: string[];
   sections: ServiceSection[];
-  /** 취급 품목 (물품형 항목용). image 는 800×600(4:3) 예시 이미지 */
+  /** 취급 품목 (물품형 항목용). image 는 800×600(4:3) 이미지 */
   products?: { name: string; description: string; image?: ServiceImage }[];
   /** 함께 보면 좋은 항목의 slug */
   related: string[];
@@ -106,11 +106,12 @@ const stockPhoto = (
   credit: string,
   source: string,
   license: string,
+  size: { width: number; height: number } = { width: 1600, height: 700 },
 ): ServiceImage => ({
   src: `/images/${file}.jpg`,
   alt,
-  width: 1600,
-  height: 700,
+  width: size.width,
+  height: size.height,
   credit,
   source,
   license,
@@ -118,47 +119,49 @@ const stockPhoto = (
 
 /**
  * 참고용 스톡 이미지 (모두 상업적 이용 가능, 출처 표기 의무 없음).
- * 회사의 실제 작업 사진이 아니므로 대체 텍스트와 캡션에서 "참고 이미지"로 표시합니다.
+ * 회사의 실제 작업 사진이 아니므로, 실제 사진이 생기면 교체하세요.
  */
 export const images = {
   cleanroomFab: stockPhoto(
     "cleanroom-fab",
-    "반도체 크린룸에서 장비를 다루는 작업자 (참고 이미지)",
+    "반도체 크린룸에서 장비를 다루는 작업자",
     "NASA Glenn Research Center (via Wikimedia Commons)",
     "https://commons.wikimedia.org/wiki/File:Clean_room.jpg",
     "Public domain (NASA)",
   ),
-  corridor: stockPhoto(
-    "cleanroom-corridor",
-    "밝고 청결한 크린룸 복도 (참고 이미지)",
-    "Tima Miroshnichenko (Pexels)",
-    "https://www.pexels.com/photo/man-technology-tiles-white-9574538/",
+  /** 홈 메인 배너 (2400×1050, 21:9) */
+  homeBanner: stockPhoto(
+    "home-banner",
+    "크린룸에서 작업 중인 작업자",
+    "Mufid Majnun (Pexels)",
+    "https://www.pexels.com/photo/man-wearing-uniform-in-a-lab-9485592/",
     "Pexels License",
+    { width: 2400, height: 1050 },
   ),
   fabrication: stockPhoto(
     "fabrication-cutting",
-    "금속 판재를 절단하는 장면 (참고 이미지)",
+    "금속 판재를 절단하는 장면",
     "Ana Victoria Valverde (Pexels)",
     "https://www.pexels.com/photo/plasma-cutting-in-factory-17180807/",
     "Pexels License",
   ),
   welding: stockPhoto(
     "welding",
-    "금속을 용접하는 장면 (참고 이미지)",
+    "금속을 용접하는 장면",
     "Valentin Saumon (Pexels)",
     "https://www.pexels.com/photo/a-person-wearing-a-protective-head-shield-welding-metals-9130186/",
     "Pexels License",
   ),
   sanding: stockPhoto(
     "sanding-grinder",
-    "그라인더로 금속 표면을 연마하는 장면 (참고 이미지)",
+    "그라인더로 금속 표면을 연마하는 장면",
     "Guduru Ajay bhargav (Pexels)",
     "https://www.pexels.com/photo/person-using-green-and-grey-angle-grinder-on-sheet-of-metal-977526/",
     "Pexels License",
   ),
   supplies: stockPhoto(
     "cleanroom-supplies",
-    "마스크와 장갑 등 크린룸 소모품 (참고 이미지)",
+    "마스크와 장갑 등 크린룸 소모품",
     "Polina Tankilevitch (Pexels)",
     "https://www.pexels.com/photo/pastel-colored-face-masks-on-white-background-7337879/",
     "Pexels License",
@@ -183,11 +186,11 @@ const productPhoto = (
   ...(approximate ? { approximate } : {}),
 });
 
-/** 취급 품목별 예시 이미지 (스톡 사진). 실제 제품 사진이 생기면 같은 이름으로 교체하세요. */
+/** 취급 품목별 이미지 (스톡 사진). 실제 제품 사진이 생기면 같은 이름으로 교체하세요. */
 const productImages = {
   haircap: productPhoto(
     "haircap",
-    "헤어캡 예시 이미지 (청록색, 실제 제품과 다를 수 있음)",
+    "헤어캡",
     "kaboompics.com (Pexels)",
     "https://www.pexels.com/photo/person-holding-a-bouffant-cap-8538701/",
     "Pexels License",
@@ -195,14 +198,14 @@ const productImages = {
   ),
   mask: productPhoto(
     "mask-white",
-    "흰색 일회용 마스크 예시 이미지",
+    "흰색 일회용 마스크",
     "Media Studio Hong Kong (Pexels)",
     "https://www.pexels.com/photo/a-white-face-mask-on-a-white-surface-8264728/",
     "Pexels License",
   ),
   swab: productPhoto(
     "swab-clean",
-    "면봉 예시 이미지 (일반 면봉, 실제 제품과 다를 수 있음)",
+    "클린면봉",
     "Daniel Dan (Pexels)",
     "https://www.pexels.com/photo/close-up-shot-of-cotton-buds-7612836/",
     "Pexels License",
@@ -210,7 +213,7 @@ const productImages = {
   ),
   gloveCotton: productPhoto(
     "glove-cotton",
-    "목장갑 예시 이미지 (코팅 장갑 사진, 실제 제품과 다를 수 있음)",
+    "목장갑",
     "gadaji66 (Pixabay)",
     "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
     "Pixabay Content License",
@@ -218,14 +221,14 @@ const productImages = {
   ),
   gloveCoated: productPhoto(
     "glove-coated",
-    "반코팅 목장갑 예시 이미지",
+    "반코팅 목장갑",
     "gadaji66 (Pixabay)",
     "https://pixabay.com/photos/work-gloves-gloves-red-gloves-865500/",
     "Pixabay Content License",
   ),
   gloveNitrile: productPhoto(
     "glove-nitrile",
-    "니트릴 장갑 예시 이미지",
+    "니트릴 장갑",
     "Callum Hilton (Pexels)",
     "https://www.pexels.com/photo/a-pair-of-blue-latex-gloves-7856715/",
     "Pexels License",
