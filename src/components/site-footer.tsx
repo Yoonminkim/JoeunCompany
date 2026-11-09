@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navigation, siteConfig } from "@/lib/site";
+import { navigation, profilePdf, siteConfig } from "@/lib/site";
 import { Container } from "./container";
 import { Logo } from "./logo";
 
@@ -19,7 +19,7 @@ export function SiteFooter() {
   ].filter((row) => row.value);
 
   return (
-    <footer className="border-t border-line bg-paper-deep">
+    <footer className="border-t border-line bg-paper-deep print:hidden">
       <Container className="grid gap-12 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo className="h-9 w-auto" />
@@ -38,6 +38,25 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+          </ul>
+
+          <p className="label mt-8">PDF</p>
+          <ul className="mt-4 space-y-2.5 text-sm font-medium">
+            <li>
+              <a
+                href={profilePdf.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent"
+              >
+                홈페이지 전체 PDF 보기
+              </a>
+            </li>
+            <li>
+              <Link href="/print" prefetch={false} className="hover:text-accent">
+                인쇄용 보기 · PDF로 저장
+              </Link>
+            </li>
           </ul>
         </nav>
 

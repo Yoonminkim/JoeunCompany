@@ -18,7 +18,7 @@ export function SiteHeader() {
   }));
 
   return (
-    <header className="site-header sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+    <header className="site-header sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur print:hidden">
       <Container className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-3.5">
         <Link
           href="/"
