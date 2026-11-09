@@ -17,6 +17,7 @@ npm run start   # 빌드 결과 실행
 | `src/lib/seo.ts` | 페이지 메타데이터 / JSON-LD(Organization, WebSite, BreadcrumbList) 생성 헬퍼 |
 | `src/app/layout.tsx` | 전역 메타데이터, 소유확인 태그, 폰트 |
 | `src/app/sitemap.ts`, `robots.ts` | `/sitemap.xml`, `/robots.txt` 자동 생성 |
+| `src/app/print`, `src/lib/company.ts`, `scripts/generate-pdf.mjs` | PDF 회사소개서: 인쇄용 페이지 / 회사소개 문구 / PDF 생성 스크립트 (아래 "PDF 회사소개서" 참고) |
 | `src/lib/services.ts` | **제품·서비스 콘텐츠 (이름·부제목·설명·취급 품목·항목별 SEO). 여기에 항목을 추가하면 목록/상세 페이지, sitemap, 구조화 데이터가 자동 생성됩니다.** |
 | `src/app/services`, `src/app/services/[slug]` | 제품·서비스 목록 / 상세 페이지 |
 | `src/app/{about,contact}` | 회사소개, 문의하기 |
@@ -27,6 +28,26 @@ npm run start   # 빌드 결과 실행
 | `public/logo.png`, `public/og-image.png`, `src/app/{favicon.ico,apple-icon.png}` | 로고에서 파생한 구조화 데이터용 로고, 공유(OG) 이미지, 아이콘 |
 
 디자인 토큰(색상·폰트)은 `src/app/globals.css` 에서 관리합니다. 포인트 색은 로고의 보라색 한 가지만 사용합니다.
+
+### PDF 회사소개서 (홈페이지 전체)
+
+홈·회사소개·제품·서비스(상세 포함)·문의 연락처를 한 권으로 묶은 PDF 를 두 가지로 제공합니다. 푸터의 "PDF" 항목에 링크가 있습니다.
+
+| 방식 | 경로 | 설명 |
+| --- | --- | --- |
+| PDF 파일 | `public/joeun-company-profile.pdf` | 미리 만들어 둔 파일. `/joeun-company-profile.pdf` 로 열림 |
+| 인쇄용 페이지 | `src/app/print/page.tsx` → `/print` | 브라우저 인쇄 창에서 "PDF로 저장". 항상 최신 내용이 반영됨. 검색엔진에는 노출하지 않음(noindex) |
+
+PDF 내용은 `/print` 페이지(= `src/lib/services.ts`, `src/lib/site.ts`, `src/lib/company.ts` 의 데이터)에서 만들어집니다.
+**위 데이터나 `/print` 를 수정했다면 PDF 파일을 다시 만들어 함께 배포하세요.**
+
+```bash
+npm run pdf                    # 빌드 → 임시 서버 → Chrome 으로 /print 를 PDF 로 저장
+npm run pdf -- --skip-build    # 최신 빌드(.next)가 이미 있을 때 빌드 생략
+```
+
+- 이 컴퓨터에 설치된 Chrome(또는 Chromium/Edge)을 사용합니다. 자동으로 못 찾으면 `CHROME_PATH` 환경변수로 실행 파일 경로를 지정하세요. (배포 서버에서는 실행하지 않으며, 만들어진 PDF 파일만 커밋해 배포합니다.)
+- 인쇄 모양(A4, 쪽 번호, 헤더·푸터 숨김)은 `src/app/globals.css` 하단의 "인쇄 / PDF" 부분과 `/print` 페이지의 클래스로 조정합니다.
 
 ### 제품·서비스 항목 추가/수정
 

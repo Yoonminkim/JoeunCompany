@@ -96,6 +96,17 @@ export const siteConfig = {
   },
 } as const;
 
+/**
+ * 홈페이지 전체를 묶은 PDF 회사소개서.
+ * 파일은 `npm run pdf` 로 /print 페이지에서 생성해 public/ 에 저장합니다. (scripts/generate-pdf.mjs)
+ */
+export const profilePdf = {
+  /** public 기준 경로 */
+  path: "/joeun-company-profile.pdf",
+  /** 방문자가 내려받을 때 쓰이는 파일명 */
+  downloadName: "조은상사-회사소개서.pdf",
+} as const;
+
 export const navigation = [
   { href: "/about", label: "회사소개" },
   { href: "/services", label: "제품·서비스" },

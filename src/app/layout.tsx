@@ -83,10 +83,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang={siteConfig.language}
       className={`${plexSansKr.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col font-sans print:block">
         <div
           aria-hidden="true"
-          className="scroll-progress fixed inset-x-0 top-0 z-50 h-[3px] bg-accent"
+          className="scroll-progress fixed inset-x-0 top-0 z-50 h-[3px] bg-accent print:hidden"
         />
         <a
           href="#main"

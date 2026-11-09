@@ -214,3 +214,66 @@ body {
 .nav-item[data-dismissed="true"] .nav-caret {
   transform: none;
 }
+
+/*
+ * 인쇄 / PDF
+ * - 모든 페이지를 A4 로 인쇄합니다. (헤더·푸터·스크롤 막대는 print:hidden 으로 숨김)
+ * - 회사소개서(/print)는 "profile" 이름의 쪽으로 지정해 아래쪽에 쪽 번호를 붙입니다. (표지 제외)
+ * - 스크롤 효과가 인쇄물에서 요소를 투명하게 남기지 않도록 모든 애니메이션을 끕니다.
+ */
+@page {
+  size: A4;
+  margin: 14mm 12mm 16mm;
+}
+
+@page profile {
+  @bottom-left {
+    content: "조은상사 · JoeunCompany";
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 8pt;
+    color: #5b5670;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 8pt;
+    color: #5b5670;
+  }
+}
+
+@page profile:first {
+  @bottom-left {
+    content: none;
+  }
+  @bottom-right {
+    content: none;
+  }
+}
+
+.profile {
+  page: profile;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  /* 배경색(회색 바탕, 강조 색 막대 등)을 인쇄에서도 그대로 유지 */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* 위에서 display 를 지정한 규칙이 print:hidden 보다 우선하므로, 쪽마다 반복 인쇄되지 않게 여기서 숨깁니다. */
+  .scroll-progress {
+    display: none !important;
+  }
+}
